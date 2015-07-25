@@ -1,7 +1,9 @@
 from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
+from django.contrib.auth.models import User
 
 # Create your models here.
+
 
 class ActiveProfileManager(models.Manager):
     def get_queryset(self):
@@ -10,19 +12,31 @@ class ActiveProfileManager(models.Manager):
 
 
 @python_2_unicode_compatible
-class ImagerProfile(models, Model):
+class ImagerProfile(models.Model):
+    PHOTOGRAPHY_TYPE_CHOICES = (
+        ('AB', 'Abstract'),
+        ('AN', 'Animal'),
+        ('AR', 'Artistic'),
+        ('BE', 'Beauty'),
+        ('FA', 'Fashion'),
+        ('LA', 'Landscape'),
+        ('NA', 'Nature'),
+        ('PE', 'People'),
+        ('TR', 'Travel'),
+        ('WE', 'Wedding'),
+    )
     user = models.OneToOneField(
-        user,
+        User,
         related_name='+',
         null=False
         )
 
-    camera = models.Charfield(max_length=128, help_text='What is model of your camera?')
-    address = models.Textfield()
-    website_url = models.UrlField()
+    camera = models.CharField(max_length=128, help_text='What is model of your camera?')
+    address = models.TextField()
+    website_url = models.URLField()
     photography_type = models.CharField(
         max_length=64,
-        helo_text="What type of photography do you primaliry make?",
+        help_text="What type of photography do you primaliry make?",
         choices=PHOTOGRAPHY_TYPE_CHOICES
     )
     friends = models.ManyToManyField(User, related_name='friends')
@@ -34,5 +48,4 @@ class ImagerProfile(models, Model):
 
     def is_active(self):
         return self.user.is_active
-
 
