@@ -20,8 +20,7 @@ class Migration(migrations.Migration):
                 ('address', models.TextField()),
                 ('website_url', models.URLField()),
                 ('photography_type', models.CharField(help_text=b'What type of photography do you primaliry make?', max_length=64, choices=[(b'AB', b'Abstract'), (b'AN', b'Animal'), (b'AR', b'Artistic'), (b'BE', b'Beauty'), (b'FA', b'Fashion'), (b'LA', b'Landscape'), (b'NA', b'Nature'), (b'PE', b'People'), (b'TR', b'Travel'), (b'WE', b'Wedding')])),
-                ('friends', models.ManyToManyField(related_name='friends', to=settings.AUTH_USER_MODEL)),
-                ('user', models.OneToOneField(related_name='+', to=settings.AUTH_USER_MODEL)),
+                ('user', models.OneToOneField(related_name='profile', to=settings.AUTH_USER_MODEL)),
             ],
         ),
     ]

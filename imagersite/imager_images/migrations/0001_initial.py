@@ -20,7 +20,7 @@ class Migration(migrations.Migration):
                 ('description', models.TextField()),
                 ('date_created', models.DateField(auto_now_add=True)),
                 ('date_modified', models.DateField(auto_now=True)),
-                ('date_published', models.DateField(auto_now=True)),
+                ('date_published', models.DateField(null=True, blank=True)),
                 ('published', models.CharField(default=b'private', max_length=256, choices=[(b'private', b'private'), (b'shared', b'shared'), (b'public', b'public')])),
             ],
         ),
@@ -28,12 +28,13 @@ class Migration(migrations.Migration):
             name='Photo',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('file', models.ImageField(upload_to=b'/photo_files/%Y-%m-%d')),
+                ('file', models.ImageField(upload_to=b'photo_files/%Y-%m-%d')),
                 ('title', models.CharField(max_length=128)),
                 ('description', models.TextField(help_text=b'Describe your photo.')),
                 ('date_created', models.DateField(auto_now_add=True)),
                 ('date_modified', models.DateField(auto_now=True)),
                 ('date_published', models.DateField(auto_now=True)),
+                ('user', models.ForeignKey(to=settings.AUTH_USER_MODEL)),
             ],
         ),
         migrations.AddField(

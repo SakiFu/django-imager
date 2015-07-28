@@ -39,7 +39,7 @@ class ImagerProfile(models.Model):
         help_text="What type of photography do you primaliry make?",
         choices=PHOTOGRAPHY_TYPE_CHOICES
     )
-    # friends = models.ManyToManyField(User, related_name='friends')
+    friends = models.ManyToManyField(User, related_name='friends')
     objects = models.Manager()
     active = ActiveProfileManager()
 
@@ -48,20 +48,3 @@ class ImagerProfile(models.Model):
 
     def is_active(self):
         return self.user.is_active
-
-# class ImagerProfileConfig(AppConfig):
-#     name = 'imager_profile'
-#     verbose_name = 'Imager Profiles'
-
-#     def ready(self):
-#         import handlers
-# from django.http import Http Reponse
-# from django.template import loader
-# from django.shortcuts import render, render_to_response
-
-# def home_view(request):
-#     context = {'foo': 'name', 'bar':'num'}
-#     return render(request, 'home.html', )
-#     template = loader.get_template('home.html')
-#     response_body = template.render()
-#     return HttpResponse(response_body)
