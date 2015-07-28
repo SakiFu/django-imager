@@ -6,7 +6,9 @@ from django.contrib.auth.models import User
 
 
 class ActiveProfileManager(models.Manager):
+    """A model manger limited only to active profiles"""
     def get_queryset(self):
+        """Filter the default queryset for active users"""
         query = super(ActiveProfileManager, self).get_queryset()
         return query.filter(user__is_active=True)
 
