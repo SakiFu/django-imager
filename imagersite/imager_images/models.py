@@ -11,7 +11,11 @@ PUBLISHED_CHOICES = (
 
 @python_2_unicode_compatible
 class Photo(models.Model):
-    file = models.ImageField(upload_to='/photo_files/%Y-%m-%d')
+    file = models.ImageField(upload_to='photo_files/%Y-%m-%d')
+    user = models.ForeignKey(
+        User,
+        null=False
+    )
     title = models.CharField(max_length=128)
     description = models.TextField(help_text="Describe your photo.")
     date_created = models.DateField(auto_now_add=True)
@@ -33,7 +37,7 @@ class Album(models.Model):
     description = models.TextField()
     date_created = models.DateField(auto_now_add=True)
     date_modified = models.DateField(auto_now=True)
-    date_published = models.DateField(auto_now=True)
+    date_published = models.DateField(null=True, blank=True)
     published = models.CharField(max_length=256,
                                  choices=PUBLISHED_CHOICES,
                                  default='private')
