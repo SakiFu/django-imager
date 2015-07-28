@@ -27,9 +27,9 @@ class ImagerProfile(models.Model):
     )
     user = models.OneToOneField(
         User,
-        related_name='+',
+        related_name='profile',
         null=False
-        )
+    )
 
     camera = models.CharField(max_length=128, help_text='What is model of your camera?')
     address = models.TextField()
@@ -39,7 +39,7 @@ class ImagerProfile(models.Model):
         help_text="What type of photography do you primaliry make?",
         choices=PHOTOGRAPHY_TYPE_CHOICES
     )
-    friends = models.ManyToManyField(User, related_name='friends')
+    # friends = models.ManyToManyField(User, related_name='friends')
     objects = models.Manager()
     active = ActiveProfileManager()
 
