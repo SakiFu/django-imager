@@ -8,7 +8,7 @@ from django.contrib.auth.models import User
 class ActiveProfileManager(models.Manager):
     def get_queryset(self):
         query = super(ActiveProfileManager, self).get_queryset()
-        return query.filter(is_active__exact=True)
+        return query.filter(user__is_active=True)
 
 
 @python_2_unicode_compatible
@@ -49,3 +49,19 @@ class ImagerProfile(models.Model):
     def is_active(self):
         return self.user.is_active
 
+# class ImagerProfileConfig(AppConfig):
+#     name = 'imager_profile'
+#     verbose_name = 'Imager Profiles'
+
+#     def ready(self):
+#         import handlers
+# from django.http import Http Reponse
+# from django.template import loader
+# from django.shortcuts import render, render_to_response
+
+# def home_view(request):
+#     context = {'foo': 'name', 'bar':'num'}
+#     return render(request, 'home.html', )
+#     template = loader.get_template('home.html')
+#     response_body = template.render()
+#     return HttpResponse(response_body)
