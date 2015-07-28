@@ -39,7 +39,6 @@ class ImagerProfile(models.Model):
         help_text="What type of photography do you primaliry make?",
         choices=PHOTOGRAPHY_TYPE_CHOICES
     )
-    friends = models.ManyToManyField(User, related_name='friends')
     objects = models.Manager()
     active = ActiveProfileManager()
 
