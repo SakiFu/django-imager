@@ -1,12 +1,29 @@
-{% extends "base.html" %}
-{% load i18n %}
+{# Load the tag library #}
+{% load bootstrap3 %}
 
-{% block content %}
-  <section class='img_cover'>
-    {% if photo %}
-      <img src="{{ MEDIA_ROOT }}{{ photo.image.url }}" alt="Cover Photo">
-    {% else %}
-      <img src="http://www.rsc.org/chemistryworld/2013/06/why-dont-naked-mole-rats-get-cancer-secret" alt="">
-    {% endif %}
-  </section>
-{% endblock %}
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{% bootstrap_javascript jquery=1 %}
+
+{% load staticfiles %}
+{% load i18n %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="{% static "css/reset.css" %}">
+    <link rel="stylesheet" href="{% static "css/layout.css" %}">
+    <link rel="stylesheet" href="{% static "css/style.css" %}">
+    <title>Home</title>
+</head>
+<body>
+    <header id="header">
+    {% block header %}
+    {% endblock %}
+    </header>
+    <main id="content">
+    {% block content %}<p>hello</p>{% endblock %}
+    </main>
+    <footer id="footer">
+    </footer>
+</body>
+</html>
