@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+  <section class='img_cover'>
+    {% if photo %}
+      <img src="{{ MEDIA_ROOT }}{{ photo.image.url }}" alt="Cover Photo">
+    {% else %}
+      <img src="http://www.rsc.org/chemistryworld/2013/06/why-dont-naked-mole-rats-get-cancer-secret" alt="">
+    {% endif %}
+  </section>
+{% endblock %}
