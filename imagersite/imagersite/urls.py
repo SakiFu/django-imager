@@ -22,7 +22,7 @@ import views
 
 urlpatterns = [
     # url(r'^imager/', include(imager_images.urls)),
-    url(r'^home/$', views.IndexView.as_view(), name='index'),
+    url(r'^$', views.IndexView.as_view(), name='index'),
     url(r'^admin/', include(admin.site.urls)),
 ]
 
