@@ -16,14 +16,14 @@
     <title>Home</title>
 </head>
 <body>
-    <header id="header">
-    {% block header %}
-    {% endblock %}
-    </header>
     <main id="content">
-    {% block content %}<p>hello</p>{% endblock %}
+        {% block content %}
+        {% if photo %}
+        <img src="{{ MEDIA_ROOT }}{{ photo.image.url }}" alt="">
+        {% else %}
+        <img src="http://www.live2agewell.com/images/MoleRats.jpg" alt="">
+        {% endif %}
+        {% endblock %}
     </main>
-    <footer id="footer">
-    </footer>
 </body>
 </html>
