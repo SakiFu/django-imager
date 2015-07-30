@@ -1,0 +1,29 @@
+{# Load the tag library #}
+{% load bootstrap3 %}
+
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{% bootstrap_javascript jquery=1 %}
+
+{% load staticfiles %}
+{% load i18n %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="{% static "css/reset.css" %}">
+    <link rel="stylesheet" href="{% static "css/layout.css" %}">
+    <link rel="stylesheet" href="{% static "css/style.css" %}">
+    <title>Home</title>
+</head>
+<body>
+    <main id="content">
+        {% block content %}
+        {% if photo %}
+        <img src="{{ MEDIA_ROOT }}{{ photo.image.url }}" alt="">
+        {% else %}
+        <img src="http://www.live2agewell.com/images/MoleRats.jpg" alt="">
+        {% endif %}
+        {% endblock %}
+    </main>
+</body>
+</html>

@@ -21,7 +21,9 @@ class Photo(models.Model):
     date_created = models.DateField(auto_now_add=True)
     date_modified = models.DateField(auto_now=True)
     date_published = models.DateField(auto_now=True)
-
+    published = models.CharField(max_length=256,
+                                 choices=PUBLISHED_CHOICES,
+                                 default='private')
     def __str__(self):
         return self.title
 
