@@ -1,25 +1,80 @@
-<!DOCTYPE html>
+
+{# Load the tag library #}
 {% load bootstrap3 %}
-<html{% if request.LANGUAGE_CODE %} lang="{{ request.LANGUAGE_CODE }}"{% endif %}>
 
-<head>
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{% bootstrap_javascript jquery=1 %}
+
+{% load staticfiles %}
+{% load i18n %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{% block bootstrap3_title %}django-bootstrap3 template title{% endblock %}</title>
-    {% bootstrap_css %}
-    {% if 'javascript_in_head'|bootstrap_setting %}{% bootstrap_javascript jquery=True %}{% endif %}
-    {% block bootstrap3_extra_head %}{% endblock %}
-</head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="../../docs-assets/ico/favicon.png">
 
+    <title>Django Imager</title>
 
-<body>
-    <head>
-    </head>
-{% block bootstrap3_content %}django-bootstrap3 template content{% endblock %}
-{% if not 'javascript_in_head'|bootstrap_setting %}{% bootstrap_javascript jquery=True %}{% endif %}
-{% block bootstrap3_extra_script %}{% endblock %}
-</body>
-    <footer>
-        footer
-    </footer>
+    <!-- Bootstrap core CSS -->
+
+    <link rel="stylesheet" href="{% static "css/bootstrap.css" %}">
+    <link rel="stylesheet" href="{% static "css/main.css" %}">
+    <!-- <link rel="stylesheet" href="{% static "css/reset.css" %}">
+    <link rel="stylesheet" href="{% static "css/layout.css" %}">
+    <link rel="stylesheet" href="{% static "css/style.css" %}"> -->
+
+    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="js/hover.zoom.js"></script>
+    <script src="js/hover.zoom.conf.js"></script>
+  </head>
+
+  <!-- <body>
+    {% block body %}{% endblock %} -->
+    <main id="content">
+    {% block content %}{% endblock %}
+    </main>
+    <!-- +++++ Footer Section +++++ -->
+    
+    <div id="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4">
+                    <h4>My Bunker</h4>
+                    <p>
+                        Some Address 987,<br/>
+                        +34 9054 5455, <br/>
+                        Madrid, Spain.
+                    </p>
+                </div><!-- /col-lg-4 -->
+                
+                <div class="col-lg-4">
+                    <h4>My Links</h4>
+                    <p>
+                        <a href="#">Dribbble</a><br/>
+                        <a href="#">Twitter</a><br/>
+                        <a href="#">Facebook</a>
+                    </p>
+                </div><!-- /col-lg-4 -->
+                
+                <div class="col-lg-4">
+                    <h4>About Stanley</h4>
+                    <p>This cute theme was created to showcase your work in a simple way. Use it wisely.</p>
+                </div><!-- /col-lg-4 -->
+            
+            </div>
+        
+        </div>
+    </div>
+    
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="assets/js/bootstrap.min.js"></script>
+  <!-- </body> -->
 </html>
