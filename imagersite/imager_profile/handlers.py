@@ -23,6 +23,6 @@ def delete_profile_for_user(sender, **kwargs):
     if not instance:
         return
     try:
-        instance.uer.delete()
+        instance.user.delete()
     except User.DoesNotExist:
         pass
