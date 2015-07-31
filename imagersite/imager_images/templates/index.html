@@ -6,7 +6,7 @@
 
   <body>
 
-    <!-- Static navbar -->
+    <!Static navbar -->
     <div class="navbar navbar-inverse navbar-static-top">
       <div class="container">
         <div class="navbar-header">
@@ -20,11 +20,11 @@
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
             {% if user.is_authenticated %}
-            <li>{% trans "Welcome" %} {{ user.username }} !</li>
-            <li><a href="{% url 'auth_logout' %}">{% trans "Log out" %}</a></li>
+            <li>Welcome {{ user.username }} !</li>
+            <li><a href="{% url 'auth_logout' %}"> Log out </a></li>
             {% else %}
-            <li><a href="{% url 'auth_login' %}">{% trans "Log in" %}</a></li>
-            <li><a href="{% url 'registration_register' %}">{% trans 'Register' %}</a></li>
+            <li><a href="{% url 'auth_login' %}"> Log in </a></li>
+            <li><a href="{% url 'registration_register' %}">Register</a></li>
             {% endif %}
           </ul>
         </div><!--/.nav-collapse -->
