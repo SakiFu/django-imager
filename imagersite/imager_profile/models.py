@@ -1,3 +1,4 @@
+from __future__ import unicode_literals
 from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
 from django.contrib.auth.models import User
@@ -33,12 +34,13 @@ class ImagerProfile(models.Model):
         null=False
     )
 
-    camera = models.CharField(max_length=128, help_text='What is model of your camera?')
+    camera = models.CharField(max_length=128,
+                              help_text='What is model of your camera?')
     address = models.TextField()
     website_url = models.URLField()
     photography_type = models.CharField(
         max_length=64,
-        help_text="What type of photography do you primaliry make?",
+        help_text="What type of photography do you primarily take?",
         choices=PHOTOGRAPHY_TYPE_CHOICES
     )
     objects = models.Manager()
