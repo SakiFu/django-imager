@@ -23,6 +23,7 @@ import views
 urlpatterns = [
     # url(r'^imager/', include(imager_images.urls)),
     url(r'^$', views.IndexView.as_view(), name='index'),
+    url(r'^profile/', include('imager_profile.urls')),
     url(r'^accounts/', include('registration.backends.default.urls')),
     url(r'^admin/', include(admin.site.urls)),
 ]
