@@ -8,7 +8,7 @@ class IndexView(TemplateView):
     template = 'index.html'
 
     def get_context_data(self, **kwargs):
-        photo = Photo.objects.filter(published='public').order_by('?').first()
+        photos = Photo.objects.filter(published='public').order_by('?').first()
         context = super(IndexView, self).get_context_data(**kwargs)
         context['photo'] = photo
         return context

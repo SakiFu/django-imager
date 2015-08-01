@@ -1,7 +1,6 @@
 from django.shortcuts import render
-from .models import Photos
 from django.views.generic import TemplateView, ListView, DetailView
-from imager_images.models import Photos, Album
+from imager_images.models import Photo, Album
 
 # Create your views here.
 class LibraryView(ListView):
