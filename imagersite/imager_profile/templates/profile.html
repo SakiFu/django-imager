@@ -12,17 +12,21 @@
                 <div class="col-lg-8 col-lg-offset-2 centered">
                     <main id="body">
                         <div>
-                            
                             {% if user.is_authenticated %}
 
-                     <h2>User Profile Info</h2>
+                     <h2>User Profile</h2>
             <ul>
                 <li>Favorite Camera: {{ user.profile.fav_camera }}</li>
                 <li>Address: {{ user.profile.address }}</li>
-                <li>Personal Website: 
+                <li>Website: 
                     <a href='{{ user.profile.url }}'>{{ user.profile.url }}</a>
                 </li>
                 <li>Photography Type: {{ user.profile.get_photo_type_display }}</li>
+            </ul>
+            <h2>Photos</h2>  
+                <ul>
+                <li>Total Photos: {{ user.photos.all|length }}</li>
+                <li>Total Albums: {{ user.album.all|length }}</li>
             </ul>
             </div>
             {% endif %}
@@ -31,7 +35,6 @@
             </div><!-- /row -->
         </div> <!-- /container -->
     </div><!-- /ww -->
-
 
     <!-- +++++ Projects Section +++++ -->
 <!-- Display photo placeholders, will be uncommented when we figure out what to put there -->
