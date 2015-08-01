@@ -88,7 +88,7 @@ DATABASES = {
 #registration
 ACCOUNT_ACTIVATION_DAYS = 7
 REGISTRATION_AUTO_LOGIN = True
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/profile'
 LOGIN_URL = '/accounts/login/'
 
 
