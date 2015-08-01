@@ -20,6 +20,9 @@ body {
     -webkit-overflow-scrolling: touch;
 }
 
+li {list-style-type: none;
+ }
+
 /* Titles */
 h1, h2, h3, h4, h5, h6 {
 	font-family: 'Montserrat', sans-serif;
@@ -57,6 +60,8 @@ a {
     -o-transition: color 0.1s ease-in, background 0.1s ease-in;
     transition: color 0.1s ease-in, background 0.1s ease-in;
 }
+
+
 
 a:hover,
 a:focus {

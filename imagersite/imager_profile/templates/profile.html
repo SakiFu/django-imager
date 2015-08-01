@@ -16,12 +16,12 @@
 
                      <h2>User Profile</h2>
             <ul>
-                <li>Favorite Camera: {{ user.profile.fav_camera }}</li>
+                <li>Favorite Camera: {{ user.profile.camera }}</li>
                 <li>Address: {{ user.profile.address }}</li>
                 <li>Website: 
-                    <a href='{{ user.profile.url }}'>{{ user.profile.url }}</a>
+                    <a href='{{ user.profile.website_url }}'>{{ user.profile.website_url }}</a>
                 </li>
-                <li>Photography Type: {{ user.profile.get_photo_type_display }}</li>
+                <li>Photography Type: {{ user.profile.photography_type }}</li>
             </ul>
             <h2>Photos</h2>  
                 <ul>
