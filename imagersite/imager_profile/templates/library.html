@@ -13,22 +13,21 @@
                     <main id="body">
                         <div>
                             {% if user.is_authenticated %}
+                            {% load thumbnail %}
+                            <h3>Library</h3>
+                        <ul>
+                            {% for photo in object_list %}
+                                <li>
+                                    <p>Date uploaded: {{ photo.date_uploaded }}</p>
+                                    {% thumbnail photo.picture "80x80" as image %}
+                                        <img src="{{ image.url }}">
+                                    {% empty %}
+                                        <p>No image</p>
+                                    {% endthumbnail %}
+                                </li>
+                            {% endfor  %}
+                        </ul>
 
-                     <h2>Library</h2>
-            <ul>
-                <li>Favorite Camera: {{ user.profile.camera }}</li>
-                <li>Address: {{ user.profile.address }}</li>
-                <li>Website: 
-                    <a href='{{ user.profile.website_url }}'>{{ user.profile.website_url }}</a>
-                </li>
-                <li>Photography Type: {{ user.profile.photography_type }}</li>
-            </ul>
-            <h2>Photos</h2>  
-                <ul>
-                <li>Total Photos: {{ user.photos.all|length }}</li>
-                <li>Total Albums: {{ user.album.all|length }}</li>
-            </ul>
-            </div>
             {% endif %}
                     </main>
                 </div><!-- /col-lg-8 -->
