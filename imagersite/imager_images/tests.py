@@ -58,7 +58,7 @@ class AlbumTestCase(TestCase):
         self.cover.save()
         self.album = AlbumFactory(user=self.user)
 
-    def test_add_album(self):
+    def test_add_albums(self):
         self.assertTrue(Album.objects.count() == 0)
         self.album.save()
         self.assertTrue(Album.objects.count() == 1)
