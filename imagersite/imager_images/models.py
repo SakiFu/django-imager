@@ -21,6 +21,9 @@ class Photo(models.Model):
     date_created = models.DateField(auto_now_add=True)
     date_modified = models.DateField(auto_now=True)
     date_published = models.DateField(auto_now=True)
+    published = models.CharField(max_length=256,
+                                 choices=PUBLISHED_CHOICES,
+                                 default='private')
 
     def __str__(self):
         return self.title
@@ -41,17 +44,18 @@ class Album(models.Model):
     published = models.CharField(max_length=256,
                                  choices=PUBLISHED_CHOICES,
                                  default='private')
-    cover = models.ForeignKey(Photo, related_name='cover_for')
+    cover = models.ForeignKey(Photo, related_name='cover_for', null=True,
+                              blank=True)
 
     def __str__(self):
         return self.title
 
-    @property
-    def cover(self):
-        qs = self.photos
-        if qs.filter(is_cover=True).exists():
-            qs = qs.filter(is_cover=True)
-        return qs.order_by('?').first()
+    # @property
+    # def cover(self):
+    #     qs = self.photos
+    #     if qs.filter(is_cover=True).exists():
+    #         qs = qs.filter(is_cover=True)
+    #     return qs.order_by('?').first()
 
 
 @python_2_unicode_compatible
