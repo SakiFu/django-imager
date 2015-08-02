@@ -1,19 +1,20 @@
 from __future__ import unicode_literals
 from django.test import TestCase
 import factory
-from faker import Faker
+from faker import Factory
 from . import models
 from .models import Photo, Album
 from django.contrib.auth.models import User
 
-fake = Faker()
+fake = Factory.create()
 
 
 class UserFactory(factory.Factory):
     class Meta:
         model = User
-    name = fake.name()
-    email = factory.LazyAttribute(lambda n: "{}@example.com".format(n.name))
+    first_name = fake.first_name()
+    email = factory.LazyAttribute(lambda n: "{}@example.com".format(
+        n.username))
     username = factory.Sequence(lambda n: "user{}".format(n))
 
 
@@ -45,7 +46,7 @@ class PhotoTestCase(TestCase):
 
     def test_photo_user(self):
         self.assertTrue(self.photo.user)
-        self.assertFalse(self.photo.user is UserFactory.create())
+        self.assertNotEqual(self.photo.user, UserFactory.create())
 
 
 class AlbumTestCase(TestCase):
