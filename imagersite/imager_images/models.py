@@ -49,20 +49,3 @@ class Album(models.Model):
 
     def __str__(self):
         return self.title
-
-    # @property
-    # def cover(self):
-    #     qs = self.photos
-    #     if qs.filter(is_cover=True).exists():
-    #         qs = qs.filter(is_cover=True)
-    #     return qs.order_by('?').first()
-
-
-@python_2_unicode_compatible
-class PhotoInAlbum(models.Model):
-    photo = models.ForeignKey(Photo)
-    album = models.ForeignKey(Album)
-    is_cover = models.BooleanField(default=False)
-
-    def __str__(self):
-        return "{}: in album {}".format(self.photo, self.album)
