@@ -34,22 +34,19 @@ class Migration(migrations.Migration):
                 ('date_created', models.DateField(auto_now_add=True)),
                 ('date_modified', models.DateField(auto_now=True)),
                 ('date_published', models.DateField(auto_now=True)),
+                ('published', models.CharField(default=b'private', max_length=256, choices=[(b'private', b'private'), (b'shared', b'shared'), (b'public', b'public')])),
                 ('user', models.ForeignKey(to=settings.AUTH_USER_MODEL)),
-            ],
-        ),
-        migrations.CreateModel(
-            name='PhotoInAlbum',
-            fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('is_cover', models.BooleanField(default=False)),
-                ('album', models.ForeignKey(to='imager_images.Album')),
-                ('photo', models.ForeignKey(to='imager_images.Photo')),
             ],
         ),
         migrations.AddField(
             model_name='album',
+            name='cover',
+            field=models.ForeignKey(related_name='cover_for', blank=True, to='imager_images.Photo', null=True),
+        ),
+        migrations.AddField(
+            model_name='album',
             name='photos',
-            field=models.ManyToManyField(related_name='albums', through='imager_images.PhotoInAlbum', to='imager_images.Photo'),
+            field=models.ManyToManyField(related_name='albums', to='imager_images.Photo', blank=True),
         ),
         migrations.AddField(
             model_name='album',
