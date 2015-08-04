@@ -7,30 +7,33 @@
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 centered">
                     <main id="body">
-                        <div>
+                        <div><h2>{{ user }}</h2>
                             {% if user.is_authenticated %}
 
+                            <h3>{{ photo.title}}</h3>
 
-                            <h3>{{ album.title}}</h3>
-
-                            {% for photo in user.photos.all %}
-
+                            {% for album in user.albums.all %}
                             <div class='grid'>
-                            {{ photo.title }}
-                            {% thumbnail photo.image "180x180" as image %}
-                            <a href="{% url 'photo' photo.id %}"><img src='{{ MEDIA_ROOT }}{{ image.url }}'/></a>
-                                <!-- <img src="{{ image.url }}"> -->
+                            {% if album.photo %}
+                                {% thumbnail photo.image "180x180" as image %}
+                                <img src="{{ image.url }}">
                                 {% endthumbnail %}
+
+                            {% else %}
+                            <p>No photo...</p>
+                            <img src='/static/img/is.jpg' height='180' width='180'>
+                            {% endif %}
+                            
                             </div>
                             {% endfor %}
 
 
-                        {% endif %}
-                                </main>
-                            </div><!-- /col-lg-8 -->
-                        </div><!-- /row -->
-                    </div> <!-- /container -->
-                </div><!-- /ww -->
+                                        {% endif %}
+                                                </main>
+                                            </div><!-- /col-lg-8 -->
+                                        </div><!-- /row -->
+                                    </div> <!-- /container -->
+                                </div><!-- /ww -->
 
     <!-- +++++ Projects Section +++++ -->
 <!-- Display photo placeholders, will be uncommented when we figure out what to put there -->

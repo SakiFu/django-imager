@@ -9,6 +9,19 @@
 
 @import url(http://fonts.googleapis.com/css?family=Montserrat:400,700);
 
+.grid {
+  float: left;
+  margin: 10px;
+  border: 5px solid #fff;
+ 
+  -webkit-transition: box-shadow 0.5s ease;
+  -moz-transition: box-shadow 0.5s ease;
+  -o-transition: box-shadow 0.5s ease;
+  -ms-transition: box-shadow 0.5s ease;
+  transition: box-shadow 0.5s ease;
+}
+ 
+
 body {
   	background-color: #ffffff;
   	font-family: 'Montserrat', sans-serif;
