@@ -12,17 +12,18 @@
 
 
                             <h3>{{ album.title}}</h3>
-
-                            {% for photo in user.photos.all %}
-
                             <div class='grid'>
+                            {% for photo in album.photos.all %}
+
                             {{ photo.title }}
                             {% thumbnail photo.image "180x180" as image %}
                             <a href="{% url 'photo' photo.id %}"><img src='{{ MEDIA_ROOT }}{{ image.url }}'/></a>
                                 <!-- <img src="{{ image.url }}"> -->
                                 {% endthumbnail %}
-                            </div>
+                            
                             {% endfor %}
+                            </div>
+
 
 
                         {% endif %}
