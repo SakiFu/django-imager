@@ -1,39 +1,43 @@
 {% extends "base.html" %}
+{% load thumbnail %}
 {% block content %}
 
-<!DOCTYPE html>
-<!-- <html lang="en">
-
-
-    <!+++++ Welcome Section +++++ -->
     <div id="ww">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 centered">
                     <main id="body">
-                        <div>
+                        <div><h2>{{ user }}</h2>
                             {% if user.is_authenticated %}
-                            {% load thumbnail %}
+                            
                             <h3>Library</h3>
-                        <ul>
-                            {% for photo in object_list %}
-                                <li>
-                                    <p>Date uploaded: {{ photo.date_uploaded }}</p>
-                                    {% thumbnail photo.picture "80x80" as image %}
-                                        <img src="{{ image.url }}">
-                                    {% empty %}
-                                        <p>No image</p>
-                                    {% endthumbnail %}
-                                </li>
-                            {% endfor  %}
-                        </ul>
+                            
 
-            {% endif %}
-                    </main>
-                </div><!-- /col-lg-8 -->
-            </div><!-- /row -->
-        </div> <!-- /container -->
-    </div><!-- /ww -->
+                            <h3>Albums</h3>
+
+                            {% for album in user.albums.all %}
+                            <div>
+                            <h4>{{ album.title }}</h4>
+                            {% if album.cover %}
+                                {% thumbnail album.cover.image "180x180" as image %}
+                                <img src="{{ image.url }}">
+                                {% endthumbnail %}
+
+                            {% else %}
+                            <p>No album</p>
+                            <img src='/static/img/naked-mole-rat_cover.jpg' height='180' width='180'>
+                            {% endif %}
+                            
+                            </div>
+                            {% endfor %}
+
+
+                                        {% endif %}
+                                                </main>
+                                            </div><!-- /col-lg-8 -->
+                                        </div><!-- /row -->
+                                    </div> <!-- /container -->
+                                </div><!-- /ww -->
 
     <!-- +++++ Projects Section +++++ -->
 <!-- Display photo placeholders, will be uncommented when we figure out what to put there -->
@@ -76,7 +80,4 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="assets/js/bootstrap.min.js"></script>
-  </body>
-</html>
 {% endblock %}

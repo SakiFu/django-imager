@@ -49,3 +49,6 @@ class ImagerProfile(models.Model):
 
     def is_active(self):
         return self.user.is_active
+
+    def show_all_album(self):
+        return self.albums.all()
