@@ -34,6 +34,7 @@ class Migration(migrations.Migration):
                 ('date_created', models.DateField(auto_now_add=True)),
                 ('date_modified', models.DateField(auto_now=True)),
                 ('date_published', models.DateField(auto_now=True)),
+                ('published', models.CharField(default=b'private', max_length=256, choices=[(b'private', b'private'), (b'shared', b'shared'), (b'public', b'public')])),
                 ('user', models.ForeignKey(to=settings.AUTH_USER_MODEL)),
             ],
         ),
@@ -49,7 +50,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='album',
             name='photos',
-            field=models.ManyToManyField(related_name='albums', through='imager_images.PhotoInAlbum', to='imager_images.Photo'),
+            field=models.ManyToManyField(related_name='albums', to='imager_images.Photo', blank=True),
         ),
         migrations.AddField(
             model_name='album',
