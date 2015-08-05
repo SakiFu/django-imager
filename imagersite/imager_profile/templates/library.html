@@ -19,6 +19,7 @@
                             {% if album.cover %}
                                 {% thumbnail album.cover.image "300x300" as image %}
                                 <a href="{% url 'album' album.id %}"><img src="{{ image.url }}"></a>
+                                <input type='button' onclick="window.location.href='/images/album/edit/{{ album.pk }}'" value='Edit'>
                                 {% endthumbnail %}
 
                             {% else %}

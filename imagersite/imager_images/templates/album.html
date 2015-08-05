@@ -10,7 +10,6 @@
                         <div>
                             {% if user.is_authenticated %}
 
-
                             <h3>{{ album.title}}</h3>
                             <div class='grid'>
                             {% for photo in album.photos.all %}
@@ -23,8 +22,6 @@
                             
                             {% endfor %}
                             </div>
-
-
 
                         {% endif %}
                                 </main>

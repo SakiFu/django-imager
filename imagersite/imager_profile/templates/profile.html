@@ -20,7 +20,8 @@
                     <a href='{{ user.profile.website_url }}'>{{ user.profile.website_url }}</a>
                 </li>
                 <li>Photography Type: {{ user.profile.photography_type }}</li>
-            </ul>
+            </ul><a href="{% url 'profile_edit' user.profile.id %}">
+            <!-- <a href="/profile/edit/{{ user.profile. }}"> --> Edit Profile</a>
             <h2>Photos</h2> 
                 <ul>
                 <li>Total Photos: {{ user.photos.count }}</li>
