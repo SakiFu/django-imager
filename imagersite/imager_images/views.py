@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from .models import Photo
 from .models import Album
-from django.views.generic import TemplateView, DetailView
+from django.views.generic import TemplateView, DetailView, CreateView, UpdateView
 from django.db.models import Q
 # from settings import MEDIA_URL, STATIC_URL
 # Create your views here.
@@ -34,6 +34,35 @@ class PhotoView(DetailView):
     #     return context
 
 
+class PhotoAddView(CreateView):
+    template_name = 'photo_add.html'
+    model = Photo
+    fields = ['image', 'title', 'description', 'published']
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        form.save()
+        return super(PhotoAddView, self).form_valid(form)
+
+class PhotoEditView(UpdateView):
+    template_name = 'photo_edit.html'
+    model = Photo
+    fields = ['image', 'title', 'description', 'published']
+
+    def get_object(self):
+        try:
+            obj = Photo.objects.get(user=self.request.user,
+                                    pk=self.kwargs['pk'])
+        except Photo.DoesNotExist:
+            raise Http404
+        return obj
+
+    def form_valid(self, form):
+        form.save()
+        return super(PhotoEditView, self).form_valid(form)
+
+
+
 class AlbumView(DetailView):
     model = Album
     template_name = 'album.html'
@@ -41,3 +70,44 @@ class AlbumView(DetailView):
     def get_queryset(self, *args, **kwargs):
         return super(AlbumView, self).get_queryset(*args, **kwargs).filter(
             Q(user=self.request.user) | Q(published='Public'))
+
+
+class AlbumAddView(CreateView):
+    template_name = 'album_add.html'
+    model = Album
+    fields = ['title', 'description', 'published', 'photos']
+
+    def get_form(self):
+        form = super(AlbumAddView, self).get_form()
+        form.fields['photos'].queryset = Photo.objects.filter(
+            user=self.request.user)
+        return form
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        form.save()
+        return super(AlbumAddView, self).form_valid(form)
+
+class AlbumEditView(UpdateView):
+    template_name = 'album_edit.html'
+    model = Album
+    fields = ['title', 'description', 'published', 'photos', 'cover']
+
+    def get_object(self):
+        try:
+            obj = Album.objects.get(user=self.request.user,
+                                    pk=self.kwargs['pk'])
+        except Album.DoesNotExist:
+            raise Http404
+        return obj
+
+    def get_form(self):
+        form = super(AlbumEditView, self).get_form()
+        form.fields['photos'].queryset = Photo.objects.filter(
+            user=self.request.user)
+        form.fields['cover'].queryset = form.instance.photos
+        return form
+
+    def form_valid(self, form):
+        form.save()
+        return super(AlbumEditView, self).form_valid(form)
