@@ -17,7 +17,9 @@ from django.conf import settings
 from django.conf.urls import include, url
 from django.contrib import admin
 from django.conf.urls.static import static
+from django.contrib.auth.decorators import login_required
 import views
+from imager_images.views import  PhotoView, AlbumView
 
 
 urlpatterns = [
@@ -27,6 +29,12 @@ urlpatterns = [
     url(r'^accounts/', include('registration.backends.default.urls')),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^images/', include('imager_images.urls')),
+        url(r'^images/album/(?P<pk>\d+)/$',
+        login_required(AlbumView.as_view()),
+        name='album'),
+    url(r'^images/photos/(?P<pk>\d+)/$',
+        login_required(PhotoView.as_view()),
+        name='photo'),
 
 ]
 

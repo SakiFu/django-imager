@@ -13,13 +13,13 @@
                             <h3>Library</h3>
                             
 
-                            <h3>Albums</h3>
+                            <h4>Albums</h4>
 
                             {% for album in user.albums.all %}
-                            <div>
+                            <div class='grid'>
                             <h4>{{ album.title }}</h4>
                             {% if album.cover %}
-                                {% thumbnail album.cover.image "180x180" as image %}
+                                {% thumbnail album.cover.image "300x300" as image %}
                                 <img src="{{ image.url }}">
                                 {% endthumbnail %}
 
