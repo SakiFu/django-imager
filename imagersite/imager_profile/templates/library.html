@@ -39,7 +39,7 @@
                             <h3 class='photo_title'>{{ photo.title }}</h3>
                             {% thumbnail photo.image "180x180" as image %}
                             <a href="{% url 'photo' photo.id %}"><img src='{{ MEDIA_ROOT }}{{ image.url }}'/></a>
-                            <input type='button' onclick="window.location.href='/images/photos/edit/{{ album.pk }}'" value='Edit'>
+                            <input type='button' onclick="window.location.href='/images/photos/edit/{{ photo.pk }}'" value='Edit'>
                             {% endthumbnail %}
                             </div>
                             </div>

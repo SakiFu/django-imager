@@ -279,7 +279,8 @@ class PhotoEditTestCase(TestCase):
             )
         self.assertIn('edited_title_photo', response.content)
         # response = c.get('/images/photos/{}/'.format(photo.id))
-        # self.assertIn('edited_title_photo', response.content) 
+        response = c.get('/images/library/')
+        # self.assertIn('edited_title_photo', response.content)
     
     def test_edit_other_user(self):
         c = Client()
@@ -319,7 +320,7 @@ class AlbumEditTestCase(TestCase):
         c.login(username='user1', password='user1_password')
         album = Album.objects.all()[0]
         response = c.get('/images/album/edit/{}/'.format(album.id))
-        # self.assertIn(album.title, response.content)
+        self.assertIn(album.title, response.content)
         response = c.post(
             '/images/album/edit/{}/'.format(album.id),
             {
@@ -328,8 +329,9 @@ class AlbumEditTestCase(TestCase):
             },
             follow=True
         )
-        # self.assertIn('edited_title_album', response.content)
-        # response = c.get('/images/album/{}/'.format(album.id))
+        self.assertIn('edited_title_album', response.content)
+        response = c.get('/images/album/{}/'.format(album.id))
+        # response = c.get('/images/library/')
         # self.assertIn('edited_title_album', response.content)
 
     def test_edit_other_user(self):
