@@ -8,14 +8,14 @@
                 <div class="col-lg-8 col-lg-offset-2 centered">
                     <main id="body">
                         <div>
+                            <h3> Add Album </h3>
                             {% if user.is_authenticated %}
-  <form action="" method="post" accept-charset="utf-8" enctype="multipart/form-data">
-  {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" name="add" value="Add">
-  </form>
+                              <form action="" method="post" enctype="multipart/form-data" >{% csrf_token %}
+                                   {{ form.as_p }}
+                                <input type="submit" value="Create"/>
+                                </form>
 
-                        {% endif %}
+                            {% endif %}
                                 </main>
                             </div><!-- /col-lg-8 -->
                         </div><!-- /row -->

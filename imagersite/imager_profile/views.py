@@ -22,7 +22,7 @@ class ImagerProfileUpdateView(UpdateView):
         'website_url',
         'photography_type'
         )
-    # success_url = reverse_lazy('profile')
+    success_url = reverse_lazy('profile')
 
 # Create your views here.
 # class LibraryView(ListView):

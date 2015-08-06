@@ -9,12 +9,10 @@
                     <main id="body">
                         <div><h2>{{ user }}</h2>
                             {% if user.is_authenticated %}
-                              <form action="" method="post" accept-charset="utf-8" enctype="multipart/form-data">
-                              {% csrf_token %}
-                              {{ form.as_p }}
-                              <input type="submit" name="add" value="Add">
-                              </form>
-
+                              <form action="" method="post">{% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Update" />
+    </form>
 
                                         {% endif %}
                                                 </main>
