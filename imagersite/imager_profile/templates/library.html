@@ -11,8 +11,8 @@
                             {% if user.is_authenticated %}
                             
                             <h3>Library</h3>
-                            
-
+                            <h3>Albums</h3>
+                            <div class='albums'>
                             {% for album in user.albums.all %}
                             <div class='grid'>
                             <h4>{{ album.title }}</h4>
@@ -30,6 +30,23 @@
                             </div>
                             {% endfor %}
 
+                            <p><h3>Photos<h3></P>
+
+                            {% for photo in user.photos.all %}
+
+                            <div class='grid'>
+                            <div class='all_photos'>
+                            <h3 class='photo_title'>{{ photo.title }}</h3>
+                            {% thumbnail photo.image "180x180" as image %}
+                            <a href="{% url 'photo' photo.id %}"><img src='{{ MEDIA_ROOT }}{{ image.url }}'/></a>
+                            <input type='button' onclick="window.location.href='/images/photos/edit/{{ album.pk }}'" value='Edit'>
+                            {% endthumbnail %}
+                            </div>
+                            </div>
+                            {% endfor %}
+
+
+
 
                                         {% endif %}
 
@@ -37,7 +54,7 @@
 
                                             </div>
                                             <p><a href="{% url 'photo_add' %}">Add</a> a photo.</p>
-<p><a href="{% url 'album_add' %}">Add</a> an album.</p><!-- /col-lg-8 -->
+                                            <p><a href="{% url 'album_add' %}">Add</a> an album.</p><!-- /col-lg-8 -->
                                         </div><!-- /row -->
                                     </div> <!-- /container -->
                                 </div><!-- /ww -->

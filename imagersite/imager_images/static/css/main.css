@@ -21,6 +21,7 @@
   transition: box-shadow 0.5s ease;
 }
  
+.form {text-align: right;}
 
 body {
   	background-color: #ffffff;
