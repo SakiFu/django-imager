@@ -6,6 +6,7 @@ from django.db.models import Q
 from django.forms.models import ModelForm
 from django.core.urlresolvers import reverse_lazy, reverse
 from django.contrib.auth.views import redirect_to_login
+from django.http import Http404
 # from settings import MEDIA_URL, STATIC_URL
 # Create your views here.
 
