@@ -10,8 +10,8 @@
 @import url(http://fonts.googleapis.com/css?family=Montserrat:400,700);
 
 body {
-  	background-color: #ffffff;
-  	font-family: 'Montserrat', sans-serif;
+    background-color: #ffffff;
+    font-family: 'Montserrat', sans-serif;
     font-weight: 400;
     font-size: 14px;
     color: #555;
@@ -22,15 +22,15 @@ body {
 
 /* Titles */
 h1, h2, h3, h4, h5, h6 {
-	font-family: 'Montserrat', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-weight: 700;
     color: #333;
 }
 
 h1 {
-	font-size: 35px;
-	margin-top: 30px;
-	margin-bottom: 30px;
+    font-size: 35px;
+    margin-top: 30px;
+    margin-bottom: 30px;
 }
 
 
@@ -74,7 +74,7 @@ a:after {
     transition: color 0.1s ease-in, background 0.1s ease-in;
 }
 
- hr {
+hr {
     display: block;
     height: 1px;
     border: 0;
@@ -83,42 +83,41 @@ a:after {
     padding: 0;
 }
 
-
 .navbar {
-	text-transform: uppercase;
-	margin-bottom: 0px;
+    text-transform: uppercase;
+    margin-bottom: 0px;
 }
 
 .navbar-inverse {
-	padding-bottom: 70px;
-	padding-top: 70px;
+    padding-bottom: 70px;
+    padding-top: 70px;
 }
 
 .navbar-inverse {
-	background-color: #1abc9c;
-	border-color: #16a085;
+    background-color: #1abc9c;
+    border-color: #16a085;
 }
 
 .navbar-inverse .navbar-nav > li > a {
-	color: white;
+    color: white;
 }
 
 .navbar-inverse .navbar-nav > li > a:hover {
-	color: #222222;
+    color: #222222;
 }
 
 .navbar-brand {
-	font-weight: 700;
-	font-size: 20px;
-	letter-spacing: 2px;
+    font-weight: 700;
+    font-size: 20px;
+    letter-spacing: 2px;
 }
 
 .navbar-inverse .navbar-brand {
-	color: white;
+    color: white;
 }
 
 .navbar-inverse .navbar-toggle {
-	border-color: transparent;
+    border-color: transparent;
 }
 
 .progress-bar-theme {
@@ -129,29 +128,29 @@ a:after {
 /* Helpers */
 
 .mt {
-	margin-top: 40px;
-	margin-bottom: 40px;
+    margin-top: 40px;
+    margin-bottom: 40px;
 }
 
 .pt {
-	padding-top: 50px;
-	padding-bottom: 50px;
+    padding-top: 50px;
+    padding-bottom: 50px;
 }
 
 
 /* +++++ WRAP SECTIONS +++++ */
 
 #ww {
-	padding-top: 70px;
-	padding-bottom: 70px;
-	background-color: #f2f2f2;
+    padding-top: 70px;
+    padding-bottom: 70px;
+    background-color: #f2f2f2;
 }
 
 
 #footer {
-	background-color: #2f2f2f;
-	padding-top: 50px;
-	padding-bottom: 50px; 
+    background-color: #2f2f2f;
+    padding-top: 50px;
+    padding-bottom: 50px;
     position: fixed;
     bottom: 0;
     width: 100%;
@@ -159,13 +158,13 @@ a:after {
 }
 
 #footer p {
-	color: white;
+    color: white;
 }
 
 #footer h4 {
-	color: white;
-	text-transform: uppercase;
-	padding-bottom: 20px;
+    color: white;
+    text-transform: uppercase;
+    padding-bottom: 20px;
 }
 
 
@@ -174,75 +173,74 @@ a:after {
 /* +++++ Color Wraps / Blog Page +++++ */
 
 #grey {
-	padding-top: 60px;
-	padding-bottom: 60px;
-	background-color: #f2f2f2;
+    padding-top: 60px;
+    padding-bottom: 60px;
+    background-color: #f2f2f2;
 }
 
 #white {
-	padding-top: 60px;
-	padding-bottom: 60px;
-	background-color: #ffffff;
+    padding-top: 60px;
+    padding-bottom: 60px;
+    background-color: #ffffff;
 }
 
 
 
 /* Blog Date*/
 bd {
-	font-size: 12px;
-	text-transform: uppercase;
-	color: #d2d2d2;
-	font-weight: 700;
+    font-size: 12px;
+    text-transform: uppercase;
+    color: #d2d2d2;
+    font-weight: 700;
 }
 
 /* Blog Author*/
 ba {
-	font-size: 12px;
-	text-transform: uppercase;
+    font-size: 12px;
+    text-transform: uppercase;
 }
 
 /* Blog Quote */
 .bq {
-	font-size: 22px;
-	padding-top: 30px;
+    font-size: 22px;
+    padding-top: 30px;
 }
 
 /* Blog Tags */
 bt {
-	font-size: 12px;
+    font-size: 12px;
 }
 
 /* ================== PORTFOLIO IMAGES HOVER EFFECT ================== */
 /* Effects also are controled by hover.zoom.js */
-.zoom { 
-    display:block; 
-    position:relative; 
-    overflow:hidden; 
+.zoom {
+    display:block;
+    position:relative;
+    overflow:hidden;
     background:transparent url(../img/loader.gif) no-repeat center;
 }
 
-
-    .zoomOverlay {
-        position:absolute;
-        top:0; left:0;
-        bottom:0; right:0;
-        display:none;
-        background-image:url(../img/zoom.png);
-        background-repeat:no-repeat;
-        background-position:center;
-    }
+.zoomOverlay {
+    position:absolute;
+    top:0; left:0;
+    bottom:0; right:0;
+    display:none;
+    background-image:url(../img/zoom.png);
+    background-repeat:no-repeat;
+    background-position:center;
+}
 
 .zoom2 {
-	opacity: 1;
+    opacity: 1;
 }
 
 .zoom2:hover {
-	opacity: 0.5;
+    opacity: 0.5;
 }
 
 /* glyphicon Configuration */
 
 .glyphicon {
-	font-size: 40px;
-	color: #1abc9c;
+    font-size: 40px;
+    color: #1abc9c;
 }
