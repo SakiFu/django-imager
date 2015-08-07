@@ -38,14 +38,10 @@ class Migration(migrations.Migration):
                 ('user', models.ForeignKey(to=settings.AUTH_USER_MODEL)),
             ],
         ),
-        migrations.CreateModel(
-            name='PhotoInAlbum',
-            fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('is_cover', models.BooleanField(default=False)),
-                ('album', models.ForeignKey(to='imager_images.Album')),
-                ('photo', models.ForeignKey(to='imager_images.Photo')),
-            ],
+        migrations.AddField(
+            model_name='album',
+            name='cover',
+            field=models.ForeignKey(related_name='cover_for', blank=True, to='imager_images.Photo', null=True),
         ),
         migrations.AddField(
             model_name='album',

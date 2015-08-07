@@ -24,6 +24,7 @@ class Photo(models.Model):
     published = models.CharField(max_length=256,
                                  choices=PUBLISHED_CHOICES,
                                  default='private')
+
     def __str__(self):
         return self.title
 
