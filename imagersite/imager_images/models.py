@@ -19,7 +19,7 @@ class Photo(models.Model):
         related_name='photos'
     )
     title = models.CharField(max_length=128)
-    description = models.TextField(help_text="Describe your photo.")
+    description = models.TextField()
     date_created = models.DateField(auto_now_add=True)
     date_modified = models.DateField(auto_now=True)
     date_published = models.DateField(auto_now=True)
