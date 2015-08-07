@@ -16,16 +16,16 @@ class ActiveProfileManager(models.Manager):
 @python_2_unicode_compatible
 class ImagerProfile(models.Model):
     PHOTOGRAPHY_TYPE_CHOICES = (
-        ('AB', 'Abstract'),
-        ('AN', 'Animal'),
-        ('AR', 'Artistic'),
-        ('BE', 'Beauty'),
-        ('FA', 'Fashion'),
-        ('LA', 'Landscape'),
-        ('NA', 'Nature'),
-        ('PE', 'People'),
-        ('TR', 'Travel'),
-        ('WE', 'Wedding'),
+        ('Abstract', 'Abstract'),
+        ('Animal', 'Animal'),
+        ('Artistic', 'Artistic'),
+        ('Beauty', 'Beauty'),
+        ('Fashion', 'Fashion'),
+        ('Landscape', 'Landscape'),
+        ('Nature', 'Nature'),
+        ('People', 'People'),
+        ('Travel', 'Travel'),
+        ('Wedding', 'Wedding'),
     )
     user = models.OneToOneField(
         User,
@@ -49,3 +49,6 @@ class ImagerProfile(models.Model):
 
     def is_active(self):
         return self.user.is_active
+
+    def show_all_album(self):
+        return self.albums.all()

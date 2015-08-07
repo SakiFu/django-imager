@@ -25,6 +25,9 @@ SECRET_KEY = '$tv9l98g6@t*$pd#^ylay0#@9llrc84gb-5n6(obowx-d2v!vf'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+TEMPLATE_DEBUG = DEBUG
+THUMBNAIL_DEBUG = DEBUG
+
 ALLOWED_HOSTS = []
 
 
@@ -40,7 +43,9 @@ INSTALLED_APPS = (
     'imager_profile',
     'imager_images',
     'bootstrap3',
-    'registration'
+    'registration',
+    'sorl.thumbnail',
+    'debug_toolbar',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -85,10 +90,18 @@ DATABASES = {
     }
 }
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'imagerdb',
+#         'USER': os.environ.get('USER'),
+#     }
+# }
+
 #registration
 ACCOUNT_ACTIVATION_DAYS = 7
 REGISTRATION_AUTO_LOGIN = True
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/profile'
 LOGIN_URL = '/accounts/login/'
 
 

@@ -2,7 +2,8 @@ from __future__ import unicode_literals
 from django.contrib.auth.models import User
 from django.test import TestCase
 import factory
-
+from imager_images.tests import PhotoFactory, AlbumFactory
+from django.test import Client
 from .models import ImagerProfile
 
 
@@ -41,3 +42,38 @@ class ProfileTestCase(TestCase):
         self.user.save()
         self.user.delete()
         self.assertTrue(ImagerProfile.objects.count() == 0)
+
+
+class ProfileViewTestCase(TestCase):
+    def setUp(self):
+        user = UserFactory(username='user1')
+        user.set_password('user1_password')
+        user.save()
+        user.profile.camera = 'NikonXXX'
+        user.profile.address = 'Seattle'
+        user.profile.website = 'www.user1.com'
+        user.profile.photography_type = 'Animal'
+        PhotoFactory(title='user1_photo', user=user)
+        AlbumFactory(title='user1_album', user=user)
+        user.profile.save()
+
+        user2 = UserFactory(username='user2')
+        user2.set_password('user1_password')
+        user2.save()
+
+    def test_view_profile(self):
+        c = Client()
+        c.login(username='user1', password='user1_password')
+        response = c.get('/profile/')
+        self.assertIn('NikonXXX', response.content)
+        self.assertIn('Seattle', response.content)
+        self.assertIn('Animal', response.content)
+
+    def test_view_profile_other_user(self):
+        c = Client()
+        c.login(username='user2', password='user2_password')
+        response = c.get('/profile/')
+        self.assertNotIn('user1', response.content)
+        self.assertNotIn('NikonXXX', response.content)
+        self.assertNotIn('Seattle', response.content)
+        self.assertNotIn('Animal', response.content)
