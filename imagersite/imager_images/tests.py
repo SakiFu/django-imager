@@ -206,18 +206,20 @@ class PhotoAddTestCase(TestCase):
         album.save()
         album.photos.add(cover)
 
-    def test_add_photo(self):
+    def test_add_new_photo(self):
         c = Client()
+        photo = Photo.objects.all()[0]
         c.login(username='user1', password='user1_password')
         with open('imager_images/sample.jpg', 'rb') as image:
             response = c.post(
                 '/images/photos/add/',
-                {'image': image, 'title': 'title_test_new_photo', 'published': 'Private'},
+                {'image': image, 'title': 'title_test_new_photo', 
+                'description': 'title_test_new_desc', 'published': 'private'},
                 follow=True
             )
         self.assertEqual(response.status_code, 200)
+        self.assertIn('<img src=\'/media/cache/', response.content)
         self.assertIn('title_test_new_photo', response.content)
-        # self.assertIn('<img src='', response.content)
 
 
 class AlbumAddTestCase(TestCase):
@@ -231,7 +233,7 @@ class AlbumAddTestCase(TestCase):
         photo = PhotoFactory.create(user=user)
         photo.save()
 
-    def test_add_album(self):
+    def test_add_new_album(self):
         c = Client()
         c.login(username='user1', password='user1_password')
         photo = Photo.objects.all()[0]
@@ -239,15 +241,15 @@ class AlbumAddTestCase(TestCase):
             '/images/album/add/',
             {
                 'title': 'title_test_new_album',
+                'description': 'title_test_new_desc',
                 'photos': photo.id,
-                'published': 'Private',
+                'published': 'private',
+                'cover': photo.id
             },
             follow=True
         )
         self.assertEqual(response.status_code, 200)
         self.assertIn('title_test_new_album', response.content)
-        # album = Album.objects.all()[0]
-        # self.assertIn(photo, album.photos.all())
 
 
 class PhotoEditTestCase(TestCase):
@@ -273,15 +275,16 @@ class PhotoEditTestCase(TestCase):
                 {
                     'image': image,
                     'title': 'edited_title_photo',
-                    'published': 'Private'
+                    'description': 'edited_test_desc',
+                    'published': 'private'
                 },
                 follow=True
             )
         self.assertIn('edited_title_photo', response.content)
-        # response = c.get('/images/photos/{}/'.format(photo.id))
+        response = c.get('/images/photos/{}/'.format(photo.id))
         response = c.get('/images/library/')
-        # self.assertIn('edited_title_photo', response.content)
-    
+        self.assertIn('edited_title_photo', response.content)
+
     def test_edit_other_user(self):
         c = Client()
         c.login(username='user2', password='user2_password')
@@ -300,6 +303,7 @@ class PhotoEditTestCase(TestCase):
         user1 = User.objects.get(username='user1')
         self.assertEqual(photo.user, user1)
         self.assertNotIn(photo.title, 'user3')
+
 
 class AlbumEditTestCase(TestCase):
     def setUp(self):
@@ -325,16 +329,16 @@ class AlbumEditTestCase(TestCase):
             '/images/album/edit/{}/'.format(album.id),
             {
                 'title': 'edited_title_album',
-                'published': 'Private'
+                'description': 'edited_test_desc',
+                'published': 'private'
             },
             follow=True
         )
-        self.assertIn('edited_title_album', response.content)
-        response = c.get('/images/album/{}/'.format(album.id))
-        # response = c.get('/images/library/')
-        # self.assertIn('edited_title_album', response.content)
 
-    def test_edit_other_user(self):
+        response = c.get('/images/library/')
+        self.assertIn('edited_title_album', response.content)
+
+    def test_edit_otheruser(self):
         c = Client()
         c.login(username='user2', password='user2_password')
         album = Album.objects.all()[0]
@@ -342,7 +346,7 @@ class AlbumEditTestCase(TestCase):
             '/images/album/edit/{}/'.format(album.id),
             {
                 'title': 'user3',
-                'published': 'Private'
+                'published': 'rivate'
             },
             follow=True
         )

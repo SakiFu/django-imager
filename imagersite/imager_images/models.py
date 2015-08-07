@@ -14,7 +14,7 @@ class Photo(models.Model):
     image = models.ImageField(upload_to='photo_files/%Y-%m-%d')
     user = models.ForeignKey(
         User,
-        null=False, 
+        null=False,
         related_name='photos'
     )
     title = models.CharField(max_length=128)
@@ -44,7 +44,7 @@ class Album(models.Model):
     published = models.CharField(max_length=256,
                                  choices=PUBLISHED_CHOICES,
                                  default='private')
-    cover = models.ForeignKey(Photo, related_name='cover_for',null=True,
+    cover = models.ForeignKey(Photo, related_name='cover_for', null=True,
         blank=True)
 
     def __str__(self):
