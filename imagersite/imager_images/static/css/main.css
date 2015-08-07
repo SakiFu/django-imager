@@ -9,7 +9,19 @@
 
 @import url(http://fonts.googleapis.com/css?family=Montserrat:400,700);
 
-li {list-style: none;}
+.grid {
+  float: left;
+  margin: 10px;
+  border: 5px solid #fff;
+ 
+  -webkit-transition: box-shadow 0.5s ease;
+  -moz-transition: box-shadow 0.5s ease;
+  -o-transition: box-shadow 0.5s ease;
+  -ms-transition: box-shadow 0.5s ease;
+  transition: box-shadow 0.5s ease;
+}
+ 
+.form {text-align: right;}
 
 body {
     background-color: #ffffff;
@@ -21,6 +33,9 @@ body {
     -webkit-font-smoothing: antialiased;
     -webkit-overflow-scrolling: touch;
 }
+
+li {list-style-type: none;
+ }
 
 /* Titles */
 h1, h2, h3, h4, h5, h6 {
@@ -60,6 +75,8 @@ a {
     transition: color 0.1s ease-in, background 0.1s ease-in;
 }
 
+
+
 a:hover,
 a:focus {
     color: #7b7b7b;
@@ -76,7 +93,7 @@ a:after {
     transition: color 0.1s ease-in, background 0.1s ease-in;
 }
 
-hr {
+ hr {
     display: block;
     height: 1px;
     border: 0;
@@ -84,6 +101,7 @@ hr {
     margin: 1em 0;
     padding: 0;
 }
+
 
 .navbar {
     text-transform: uppercase;
@@ -152,7 +170,7 @@ hr {
 #footer {
     background-color: #2f2f2f;
     padding-top: 50px;
-    padding-bottom: 50px;
+    padding-bottom: 50px; 
     position: fixed;
     bottom: 0;
     width: 100%;
@@ -215,22 +233,23 @@ bt {
 
 /* ================== PORTFOLIO IMAGES HOVER EFFECT ================== */
 /* Effects also are controled by hover.zoom.js */
-.zoom {
-    display:block;
-    position:relative;
-    overflow:hidden;
+.zoom { 
+    display:block; 
+    position:relative; 
+    overflow:hidden; 
     background:transparent url(../img/loader.gif) no-repeat center;
 }
 
-.zoomOverlay {
-    position:absolute;
-    top:0; left:0;
-    bottom:0; right:0;
-    display:none;
-    background-image:url(../img/zoom.png);
-    background-repeat:no-repeat;
-    background-position:center;
-}
+
+    .zoomOverlay {
+        position:absolute;
+        top:0; left:0;
+        bottom:0; right:0;
+        display:none;
+        background-image:url(../img/zoom.png);
+        background-repeat:no-repeat;
+        background-position:center;
+    }
 
 .zoom2 {
     opacity: 1;
