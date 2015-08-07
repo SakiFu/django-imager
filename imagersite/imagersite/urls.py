@@ -19,7 +19,7 @@ from django.contrib import admin
 from django.conf.urls.static import static
 from django.contrib.auth.decorators import login_required
 import views
-from imager_images.views import  PhotoView, AlbumView
+from imager_images.views import PhotoView, AlbumView
 
 
 urlpatterns = [
