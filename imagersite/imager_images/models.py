@@ -14,7 +14,7 @@ class Photo(models.Model):
     image = models.ImageField(upload_to='photo_files/%Y-%m-%d')
     user = models.ForeignKey(
         User,
-        null=False, 
+        null=False,
         related_name='photos'
     )
     title = models.CharField(max_length=128)
@@ -49,12 +49,3 @@ class Album(models.Model):
 
     def __str__(self):
         return self.title
-
-# @python_2_unicode_compatible
-# class PhotoInAlbum(models.Model):
-#     photo = models.ForeignKey(Photo)
-#     album = models.ForeignKey(Album)
-#     is_cover = models.BooleanField(default=False)
-
-#     def __str__(self):
-#         return "{}: in album {}".format(self.photo, self.album)
