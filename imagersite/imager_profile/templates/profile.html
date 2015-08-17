@@ -12,23 +12,25 @@
                             {% if user.is_authenticated %}
 
                      <h2>User Profile</h2>
-                        <ul>
-                            <li>Username: {{ user.username }}</li>
-                            <li>Favorite Camera: {{ user.profile.camera }}</li>
-                            <li>Address: {{ user.profile.address }}</li>
-                            <li>Website: 
-                                <a href='{{ user.profile.website_url }}'>{{ user.profile.website_url }}</a>
-                            </li>
-                            <li>Photography Type: {{ user.profile.photography_type }}</li>
-                        </ul>
-                        <h2>Photos</h2> 
-                            <ul>
-                            <li>Total Photos: {{ user.photos.count }}</li>
-                            <li>Total Albums: {{ user.albums.count }}</li>
-                            </ul>
-                        </div>
-                        {% endif %}
-                        <h3><a href='/images/library'>Library</a></h3>
+            <ul>
+                <li>Username: {{ user.username }}</li>
+                <li>Favorite Camera: {{ user.profile.camera }}</li>
+                <li>Address: {{ user.profile.address }}</li>
+                <li>Website: 
+                    <a href='{{ user.profile.website_url }}'>{{ user.profile.website_url }}</a>
+                </li>
+                <li>Photography Type: {{ user.profile.photography_type }}</li>
+            </ul><a href="{% url 'profile_edit' user.profile.id %}">
+            <!-- <a href="/profile/edit/{{ user.profile. }}"> --> Edit Profile</a>
+            <h2>Photos</h2> 
+                <ul>
+                <li>Total Photos: {{ user.photos.count }}</li>
+                <li>Total Albums: {{ user.albums.count }}</li>
+                </ul>
+            </div>
+
+            {% endif %}
+            <h3><a href='/images/library'>Library</a></h3>
                     </main>
                 </div><!-- /col-lg-8 -->
             </div><!-- /row -->
@@ -77,6 +79,7 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="assets/js/bootstrap.min.js"></script>
+
   </body>
 </html>
 {% endblock %}
