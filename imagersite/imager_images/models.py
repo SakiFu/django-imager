@@ -18,7 +18,7 @@ class Photo(models.Model):
         related_name='photos'
     )
     title = models.CharField(max_length=128)
-    description = models.TextField(help_text="Describe your photo.")
+    description = models.TextField()
     date_created = models.DateField(auto_now_add=True)
     date_modified = models.DateField(auto_now=True)
     date_published = models.DateField(auto_now=True)
@@ -44,8 +44,17 @@ class Album(models.Model):
     published = models.CharField(max_length=256,
                                  choices=PUBLISHED_CHOICES,
                                  default='private')
-    cover = models.ForeignKey(Photo, related_name='cover_for',null=True,
+    cover = models.ForeignKey(Photo, related_name='cover_for', null=True,
         blank=True)
 
     def __str__(self):
         return self.title
+
+# @python_2_unicode_compatible
+# class PhotoInAlbum(models.Model):
+#     photo = models.ForeignKey(Photo)
+#     album = models.ForeignKey(Album)
+#     is_cover = models.BooleanField(default=False)
+
+#     def __str__(self):
+#         return "{}: in album {}".format(self.photo, self.album)

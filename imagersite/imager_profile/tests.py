@@ -3,8 +3,8 @@ from django.contrib.auth.models import User
 from django.test import TestCase
 import factory
 from imager_images.tests import PhotoFactory, AlbumFactory
-from django.test import Client
 from .models import ImagerProfile
+from django.test import Client
 
 
 class UserFactory(factory.Factory):
@@ -77,3 +77,33 @@ class ProfileViewTestCase(TestCase):
         self.assertNotIn('NikonXXX', response.content)
         self.assertNotIn('Seattle', response.content)
         self.assertNotIn('Animal', response.content)
+
+
+class ProfileEditTestCase(TestCase):
+    def setUp(self):
+        user = UserFactory(username='user1')
+        user.set_password('user1_password')
+        user.save()
+        user.profile.camera = 'NikonXXX'
+        user.profile.address = 'Seattle'
+        user.profile.website = 'www.user1.com'
+        user.profile.photography_type = 'Animal'
+        user.profile.save()
+
+    def test_profile_edit_view(self):
+        c = Client()
+        c.login(username='user1', password='user1_password')
+        user = User.objects.all()[0]
+        response = c.get('/profile/edit/{}/'.format(user.pk))
+        self.assertIn(user.profile.camera, response.content)
+        response = c.post(
+            '/profile/edit/{}/'.format(user.pk),
+            {
+                'camera': 'Polaroid',
+                'address': 'SF',
+                'photography_type': 'Wedding',
+            },
+            follow=True
+        )
+        self.assertIn('Polaroid', response.content)
+        self.assertIn('SF', response.content)

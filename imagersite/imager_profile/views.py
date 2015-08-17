@@ -1,7 +1,4 @@
 from django.shortcuts import render
-
-
-from django.shortcuts import render
 from django.views.generic import UpdateView
 from imager_profile.models import ImagerProfile
 from django.core.urlresolvers import reverse_lazy
