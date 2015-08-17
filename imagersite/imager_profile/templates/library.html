@@ -25,6 +25,7 @@
                             {% else %}
                             <p>You don't have any photo</p>
                             <img src='/static/img/is.jpg' height='180' width='180'>
+                            <input type='button' onclick="window.location.href='/images/album/edit/{{ album.pk }}'" value='Edit'>
                             {% endif %}
 
                             </div>
@@ -38,6 +39,7 @@
                             <h3 class='photo_title'>{{ photo.title }}</h3>
                             {% thumbnail photo.image "180x180" as image %}
                             <a href="{% url 'photo' photo.id %}"><img src='{{ MEDIA_ROOT }}{{ image.url }}'/></a>
+                            <input type='button' onclick="window.location.href='/images/photos/edit/{{ photo.pk }}'" value='Edit'>
                             {% endthumbnail %}
                             </div>
                             {% endfor %}
@@ -48,6 +50,8 @@
                                     </main>
 
                                 </div>
+                                <p><a href="{% url 'photo_add' %}">Add</a> a photo.</p>
+                                <p><a href="{% url 'album_add' %}">Add</a> an album.</p>
                             </div><!-- /row -->
                         </div> <!-- /container -->
                     </div><!-- /ww -->
