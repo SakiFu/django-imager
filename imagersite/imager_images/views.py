@@ -42,7 +42,7 @@ class PhotoView(DetailView):
 class PhotoAddView(CreateView):
     template_name = 'photo_add.html'
     model = Photo
-    fields = ['image', 'title', 'description', 'published']
+    fields = ['image', 'title', 'description', 'published', 'location']
     success_url = '/images/library/'
 
     def form_valid(self, form):
@@ -89,7 +89,7 @@ class PhotoAddView(CreateView):
 class PhotoEditView(UpdateView):
     template_name = 'photo_edit.html'
     model = Photo
-    fields = ['image', 'title', 'description', 'published']
+    fields = ['image', 'title', 'description', 'published', 'location']
     success_url = '/images/library/'
 
     def get_object(self):
@@ -117,7 +117,7 @@ class AlbumView(DetailView):
 class AlbumAddView(CreateView):
     template_name = 'album_add.html'
     model = Album
-    fields = ['title', 'description', 'published']
+    fields = ['title', 'description', 'published', 'location']
     success_url = '/images/library/'
 
     def get_form(self):
@@ -135,7 +135,7 @@ class AlbumAddView(CreateView):
 class AlbumEditView(UpdateView):
     template_name = 'album_edit.html'
     model = Album
-    fields = ['title', 'description', 'published', 'photos', 'cover']
+    fields = ['title', 'description', 'published', 'photos', 'cover', 'location']
     success_url = '/images/library/'
 
     def get_object(self):
