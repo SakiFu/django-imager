@@ -50,11 +50,15 @@ class Album(models.Model):
     def __str__(self):
         return self.title
 
-# @python_2_unicode_compatible
-# class PhotoInAlbum(models.Model):
-#     photo = models.ForeignKey(Photo)
-#     album = models.ForeignKey(Album)
-#     is_cover = models.BooleanField(default=False)
 
-#     def __str__(self):
-#         return "{}: in album {}".format(self.photo, self.album)
+@python_2_unicode_compatible
+class FaceRecognition(models.Model):
+    photo = models.ForeignKey(Photo, related_name='faces', null=False)
+    name = models.CharField(max_length=128, blank=True, null=True)
+    x = models.IntegerField()
+    y = models.IntegerField()
+    height = models.IntegerField()
+    width = models.IntegerField
+
+    def __str__(self):
+        return 'face:' + self.name
