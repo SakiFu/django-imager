@@ -7,17 +7,18 @@
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 centered">
                     <main id="body">
+                        <h2>Library</h2>
                         <div><h3><a href='/profile'>{{ user }}</a></h3>
                             {% if user.is_authenticated %}
-                            
-                            <h3>Library</h3>
+                            <br></br>
+
                             <h3>Albums</h3>
                             <div class='albums'>
                             {% for album in user.albums.all %}
                             <div class='grid'>
                             <h4>{{ album.title }}</h4>
                             {% if album.cover %}
-                                {% thumbnail album.cover.image "300x300" as image %}
+                                {% thumbnail album.cover.image "180x180" as image %}
                                 <a href="{% url 'album' album.id %}"><img src="{{ image.url }}"></a>
                                 {% endthumbnail %}
 
@@ -25,11 +26,11 @@
                             <p>You don't have any photo</p>
                             <img src='/static/img/is.jpg' height='180' width='180'>
                             {% endif %}
-                            
+
                             </div>
                             {% endfor %}
-
-                            <p><h3>Photos<h3></P>
+                            <br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br>
+                            <h3>Photos<h3>
 
                             {% for photo in user.photos.all %}
 
