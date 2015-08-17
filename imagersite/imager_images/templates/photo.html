@@ -12,9 +12,9 @@
 
                             <h3>{{ photo.title}}</h3>
 
-                            
+
                             <div class='grid'>
-                            
+
                                 {% thumbnail photo.image "600x600" as image %}
                                 <img src="{{ image.url }}">
                                 {% endthumbnail %}
@@ -29,9 +29,6 @@
                             <p>This photo is: {{ photo.published }}</p>
                             </div>
                             </div>
-                            
-
-
                                         {% endif %}
                     </main>
                 </div><!-- /col-lg-8 -->
@@ -39,45 +36,5 @@
         </div> <!-- /container -->
     </div><!-- /ww -->
 
-    <!-- +++++ Projects Section +++++ -->
-<!-- Display photo placeholders, will be uncommented when we figure out what to put there -->
-<!--    <div class="container pt">
-        <div class="row mt centered">
-            <div class="col-lg-4">
-                <a class="zoom green" href="work01.html"><img class="img-responsive" src="assets/img/portfolio/port01.jpg" alt="" /></a>
-                <p>APE</p>
-            </div>
-            <div class="col-lg-4">
-                <a class="zoom green" href="work01.html"><img class="img-responsive" src="assets/img/portfolio/port02.jpg" alt="" /></a>
-                <p>RAIDERS</p>
-            </div>
-            <div class="col-lg-4">
-                <a class="zoom green" href="work01.html"><img class="img-responsive" src="assets/img/portfolio/port03.jpg" alt="" /></a>
-                <p>VIKINGS</p> -->
-<!--            </div> -->
-        <!-- </div> --><!-- /row -->
-<!--        <div class="row mt centered">
-            <div class="col-lg-4">
-                <a class="zoom green" href="work01.html"><img class="img-responsive" src="assets/img/portfolio/port04.jpg" alt="" /></a>
-                <p>YODA</p>
-            </div>
-            <div class="col-lg-4">
-                <a class="zoom green" href="work01.html"><img class="img-responsive" src="assets/img/portfolio/port05.jpg" alt="" /></a>
-                <p>EMPERORS</p>
-            </div>
-            <div class="col-lg-4">
-                <a class="zoom green" href="work01.html"><img class="img-responsive" src="assets/img/portfolio/port06.jpg" alt="" /></a>
-                <p>CHIEFS</p>
-            </div> -->
-        <!-- </div> --><!-- /row -->
-    <!-- </div> --><!-- /container -->
 
-
-    <!-- +++++ Footer Section +++++ -->
-
-
-
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
 {% endblock %}
