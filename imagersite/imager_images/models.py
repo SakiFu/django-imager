@@ -27,7 +27,7 @@ class Photo(models.Model):
                                  choices=PUBLISHED_CHOICES,
                                  default='private')
 
-    location = geo_models.PointField(geography=True, null=True, blank=True)
+    location = geo_models.PointField("location", null=True, blank=True)
     objects = geo_models.GeoManager()
     # location = geo_models.PointField("location", null=True, blank=True)
     # objects = geo_models.Manager()
