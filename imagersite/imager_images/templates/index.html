@@ -14,20 +14,20 @@
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 centered">
                     <main id="body">
-        {% if photo %}
-        <img src="{{ MEDIA_ROOT }}{{ photo.image.url }}" alt="">
-        {% else %}
-        <img src="http://www.live2agewell.com/images/MoleRats.jpg" alt="">
-        {% endif %}
-        <h4>Django Imager lets you share and manage your photos effortlessly</h4>
-        <p>You can create and customize your imager profile with your favorite photos.
-            Now sharing your photos with your friends and family is just a click away.</p>
-        {% if not user.is_authenticated %}
-            <p><a href="http://eepurl.com/IcgkX">Join Us Now</a></p>
-        {% endif %}
-        <h3><a href='/profile'>Profile</a></h3>
-        <h3><a href='/images/library'>Library</a></h3>
-    </main>
+                    {% if photo %}
+                    <img src="{{ MEDIA_ROOT }}{{ photo.image.url }}" alt="">
+                    {% else %}
+                    <img src="http://www.live2agewell.com/images/MoleRats.jpg" alt="">
+                    {% endif %}
+                    <h4>Django Imager lets you share and manage your photos effortlessly</h4>
+                    <p>You can create and customize your imager profile with your favorite photos.
+                        Now sharing your photos with your friends and family is just a click away.</p>
+                    {% if not user.is_authenticated %}
+                        <p><a href="http://eepurl.com/IcgkX">Join Us Now</a></p>
+                    {% endif %}
+                    <h3><a href='/profile'>Profile</a></h3>
+                    <h3><a href='/images/library'>Library</a></h3>
+                </main>
                 </div><!-- /col-lg-8 -->
             </div><!-- /row -->
         </div> <!-- /container -->

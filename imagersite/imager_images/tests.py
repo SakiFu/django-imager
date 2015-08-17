@@ -22,13 +22,15 @@ class UserFactory(factory.Factory):
 class PhotoFactory(factory.Factory):
     class Meta:
         model = Photo
-    title = 'title_test_album'
+        # django_get_or_create = ('title', 'description',)
+    title = 'title_test_photo'
     description = 'description_test_photo'
 
 
 class AlbumFactory(factory.Factory):
     class Meta:
         model = Album
+        # django_get_or_create = ('title', 'description',)
     title = 'title_test_album'
     description = 'description_album_test'
 
@@ -183,6 +185,7 @@ class LibraryViewTestCase(TestCase):
         self.assertIn(album.title, response.content)
 
     def test_library_view_nonuser(self):
+        
         photo = Photo.objects.all()[0]
         album = Album.objects.all()[0]
         c = Client()
@@ -190,3 +193,165 @@ class LibraryViewTestCase(TestCase):
         response = c.get('/images/library/')
         self.assertNotIn(photo.title, response.content)
         self.assertNotIn(album.title, response.content)
+
+
+class PhotoAddTestCase(TestCase):
+    def setUp(self):
+        user = UserFactory.create(username='user1')
+        user.set_password('user1_password')
+        user.save()
+        cover = PhotoFactory.create(user=user)
+        cover.save()
+        album = AlbumFactory.create(cover=cover, user=user)
+        album.save()
+        album.photos.add(cover)
+
+    def test_add_new_photo(self):
+        c = Client()
+        photo = Photo.objects.all()[0]
+        c.login(username='user1', password='user1_password')
+        with open('imager_images/sample.jpg', 'rb') as image:
+            response = c.post(
+                '/images/photos/add/',
+                {'image': image, 'title': 'title_test_new_photo', 
+                'description': 'title_test_new_desc', 'published': 'private'},
+                follow=True
+            )
+        self.assertEqual(response.status_code, 200)
+        self.assertIn('<img src=\'/media/cache/', response.content)
+        self.assertIn('title_test_new_photo', response.content)
+
+
+class AlbumAddTestCase(TestCase):
+    def setUp(self):
+        user = UserFactory.create(username='user1')
+        user.set_password('user1_password')
+        user.save()
+        user2 = UserFactory.create(username='user2')
+        user2.set_password('user2_password')
+        user2.save()
+        photo = PhotoFactory.create(user=user)
+        photo.save()
+
+    def test_add_new_album(self):
+        c = Client()
+        c.login(username='user1', password='user1_password')
+        photo = Photo.objects.all()[0]
+        response = c.post(
+            '/images/album/add/',
+            {
+                'title': 'title_test_new_album',
+                'description': 'title_test_new_desc',
+                'photos': photo.id,
+                'published': 'private',
+                'cover': photo.id
+            },
+            follow=True
+        )
+        self.assertEqual(response.status_code, 200)
+        self.assertIn('title_test_new_album', response.content)
+
+
+class PhotoEditTestCase(TestCase):
+    def setUp(self):
+        user = UserFactory.create(username='user1')
+        user.set_password('user1_password')
+        user.save()
+        user2 = UserFactory.create(username='user2')
+        user2.set_password('user2_password')
+        user2.save()
+        photo = PhotoFactory.create(user=user)
+        photo.save()
+
+    def test_edit_photo(self):
+        c = Client()
+        c.login(username='user1', password='user1_password')
+        photo = Photo.objects.all()[0]
+        response = c.get('/images/photos/edit/{}/'.format(photo.id))
+        self.assertIn(photo.title, response.content)
+        with open('imager_images/sample.jpg', 'rb') as image:
+            response = c.post(
+                '/images/photos/edit/{}/'.format(photo.id),
+                {
+                    'image': image,
+                    'title': 'edited_title_photo',
+                    'description': 'edited_test_desc',
+                    'published': 'private'
+                },
+                follow=True
+            )
+        self.assertIn('edited_title_photo', response.content)
+        response = c.get('/images/photos/{}/'.format(photo.id))
+        response = c.get('/images/library/')
+        self.assertIn('edited_title_photo', response.content)
+
+    def test_edit_other_user(self):
+        c = Client()
+        c.login(username='user2', password='user2_password')
+        photo = Photo.objects.all()[0]
+        with open('imager_images/sample.jpg', 'rb') as image:
+            response = c.post(
+                '/images/photos/edit/{}/'.format(photo.id),
+                {
+                    'image': image,
+                    'title': 'user3',
+                    'published': 'Private'
+                },
+                follow=True
+            )
+        self.assertEqual(response.status_code, 404)
+        user1 = User.objects.get(username='user1')
+        self.assertEqual(photo.user, user1)
+        self.assertNotIn(photo.title, 'user3')
+
+
+class AlbumEditTestCase(TestCase):
+    def setUp(self):
+        user = UserFactory.create(username='user1')
+        user.set_password('user1_password')
+        user.save()
+        user2 = UserFactory.create(username='user2')
+        user2.set_password('user2_password')
+        user2.save()
+        cover = PhotoFactory.create(user=user)
+        cover.save()
+        album = AlbumFactory.create(cover=cover, user=user)
+        album.save()
+        album.photos.add(cover)
+
+    def test_edit_album(self):
+        c = Client()
+        c.login(username='user1', password='user1_password')
+        album = Album.objects.all()[0]
+        response = c.get('/images/album/edit/{}/'.format(album.id))
+        self.assertIn(album.title, response.content)
+        response = c.post(
+            '/images/album/edit/{}/'.format(album.id),
+            {
+                'title': 'edited_title_album',
+                'description': 'edited_test_desc',
+                'published': 'private'
+            },
+            follow=True
+        )
+
+        response = c.get('/images/library/')
+        self.assertIn('edited_title_album', response.content)
+
+    def test_edit_otheruser(self):
+        c = Client()
+        c.login(username='user2', password='user2_password')
+        album = Album.objects.all()[0]
+        response = c.post(
+            '/images/album/edit/{}/'.format(album.id),
+            {
+                'title': 'user3',
+                'published': 'rivate'
+            },
+            follow=True
+        )
+        self.assertEqual(response.status_code, 404)
+        user1 = User.objects.get(username='user1')
+        album = Album.objects.all()[0]
+        self.assertEqual(album.user, user1)
+        self.assertNotIn(album.title, 'user3')

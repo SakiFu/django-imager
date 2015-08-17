@@ -9,30 +9,14 @@
                     <main id="body">
                         <div><h2>{{ user }}</h2>
                             {% if user.is_authenticated %}
-
-                            <h3>{{ photo.title}}</h3>
-
-                            
-                            <div class='grid'>
-                            
-                                {% thumbnail photo.image "600x600" as image %}
-                                <img src="{{ image.url }}">
-                                {% endthumbnail %}
-
-                            <!-- <p>No photo...</p>
-                            <img src='/static/img/is.jpg' height='180' width='180'> -->
-                            <div class='info'>
-                            <p>{{ photo.description }}</p>
-                            <p><strong>Created:</strong> {{ photo.date_created|date:"D d M Y" }}</p>
-                            <p><strong>Modified:</strong> {{ photo.date_modified|date:"D d M Y" }}</p>
-                            <p><strong>Published:</strong> {{ photo.date_published|date:"D d M Y" }}</p>
-                            <p>This photo is: {{ photo.published }}</p>
-                            </div>
-                            </div>
-                            
+                              <form action="" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+                              {% csrf_token %}
+                              {{ form.as_p }}
+                                <input type="submit" name="add" value="Add">
+                              </form>
 
 
-                                        {% endif %}
+                            {% endif %}
                     </main>
                 </div><!-- /col-lg-8 -->
             </div><!-- /row -->
