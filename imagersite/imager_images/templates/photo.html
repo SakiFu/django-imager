@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load thumbnail %}
 {% block content %}
+    <script type="text/javascript" src="//algorithmia.com/v1/clients/js/algorithmia-0.2.0.js"></script>
 
     <div id="ww">
         <div class="container">
@@ -23,6 +24,13 @@
                             <img src='/static/img/is.jpg' height='180' width='180'> -->
                             <div class='info'>
                             <p>{{ photo.description }}</p>
+                            {% for face in photo.faces.all %}
+                            <div style="width: {{face.width}}px;height:{{face.height}}px;border:2px solid yellow;position:absolute;top: {{face.y}}px; left: {{face.x}}px;"></div>
+                            {% endfor %}
+                            </div>
+                                    {% if not faces %}
+                                      <a href="{% url 'detect_faces' object.id %}"><button class='facelabel'>Detect Faces</button></a>
+                                    {% endif %}
                             <p><strong>Created:</strong> {{ photo.date_created|date:"D d M Y" }}</p>
                             <p><strong>Modified:</strong> {{ photo.date_modified|date:"D d M Y" }}</p>
                             <p><strong>Published:</strong> {{ photo.date_published|date:"D d M Y" }}</p>

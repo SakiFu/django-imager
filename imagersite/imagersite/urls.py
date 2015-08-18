@@ -43,6 +43,8 @@ urlpatterns = [
     url(r'^images/photos/edit/(?P<pk>\d+)/$',
         login_required(PhotoEditView.as_view()),
         name='photo_edit'),
+    url(r'^photos/(?P<pk>\d+)/detect$', PhotoView.as_view(detect=True),
+        name='detect_faces')
 
 ]
 

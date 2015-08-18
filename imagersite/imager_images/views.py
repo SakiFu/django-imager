@@ -7,9 +7,36 @@ from django.forms.models import ModelForm
 from django.core.urlresolvers import reverse_lazy, reverse
 from django.contrib.auth.views import redirect_to_login
 from django.http import Http404
+import os
 # from settings import MEDIA_URL, STATIC_URL
 # Create your views here.
 
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+def get_faces(photo):
+    import Algorithmia
+    import base64
+    Algorithmia.apiKey = os.environ['ALGORITHMIA_KEY']
+    # file_path = 'media/' + str(photo.file)
+    # file_path = os.path.join(BASE_DIR, file_path)
+
+    with open(file_path, 'rb') as img:
+        b64 = base64.b64encode(img.read())
+
+    result = Algorithmia.algo("/ANaimi/FaceDetection").pipe(b64)
+
+    faces = []
+    for rect in result:
+        face = Face()
+        face.photo = photo
+        face.name = '?'
+        face.x = rect['x']
+        face.y = rect['y']
+        face.width = rect['width']
+        face.height = rect['height']
+        face.save()
+        faces.append(face)
+    return faces
 
 class IndexView(TemplateView):
     template = 'index.html'
