@@ -16,11 +16,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 def get_faces(photo):
     import Algorithmia
     import base64
-    Algorithmia.apiKey = os.environ['Simple simkBOjTtJ05lfuY+E03zcdDKm61']
-    file_path = 'media/' + str(photo.file)
-    file_path = os.path.join(BASE_DIR, file_path)
+    Algorithmia.apiKey = "Simple simWy1EsBB4ZucRa4q8DiPocne11"
 
-    with open(file_path, 'rb') as img:
+    with open(photo.image.path, "rb") as img:
         b64 = base64.b64encode(img.read())
 
     result = Algorithmia.algo("/ANaimi/FaceDetection").pipe(b64)
@@ -36,6 +34,7 @@ def get_faces(photo):
         face.height = rect['height']
         face.save()
         faces.append(face)
+
     return faces
 
 
@@ -49,6 +48,8 @@ def set_faces(request, id):
     face.name = request.POST.get('name', 'Unknown')
     face.save()
     return HttpResponse("Done.")
+
+
 
 
 class FaceEditView(TemplateView):
@@ -82,6 +83,15 @@ class PhotoView(DetailView):
     def get_queryset(self, *args, **kwargs):
         return super(PhotoView, self).get_queryset(*args, **kwargs).filter(
             Q(user=self.request.user) | Q(published='Public'))
+
+    def get_context_data(self, **kwargs):
+        context = super(DetailView, self).get_context_data(**kwargs)
+        if self.detect and len(self.object.faces.all()) == 0:
+            get_faces(self.object)
+
+        context['faces'] = self.object.faces.all()
+
+        return context
 
 
 class PhotoAddView(CreateView):

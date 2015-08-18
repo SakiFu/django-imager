@@ -5,7 +5,7 @@
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
     <script type="text/javascript" src="//algorithmia.com/v1/clients/js/algorithmia-0.2.0.js"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/sweetalert/1.0.1/sweetalert-dev.js"></script>
-
+    <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
 
     <div id="ww">
         <div class="container">
@@ -31,7 +31,7 @@
                             <div>
                                 
                                     {% if not faces %}
-                                      <a href="{% url 'detect_faces' object.id %}"><button class='facelabel'>Detect Faces</button></a>
+                                      <a href="{% url 'detect_faces' object.id %}"><button>Detect Faces</button></a>
                                     {% endif %}
                                       <script type="text/javascript">
                             FaceTagger.init({
