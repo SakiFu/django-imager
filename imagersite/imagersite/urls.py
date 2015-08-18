@@ -17,12 +17,33 @@ from django.conf import settings
 from django.conf.urls import include, url
 from django.contrib import admin
 from django.conf.urls.static import static
+from django.contrib.auth.decorators import login_required
+import views
+from imager_images.views import  PhotoView, AlbumView, AlbumAddView, PhotoAddView, AlbumEditView, PhotoEditView
 
 
 urlpatterns = [
-    # url(r'^/$', views.IndexView.as_view(), name='index')
-    # url(r'^imager/', include(imager_images.urls)),
+    url(r'^$', views.IndexView.as_view(), name='index'),
+    url(r'^profile/', include('imager_profile.urls')),
+    url(r'^accounts/', include('registration.backends.default.urls')),
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^images/', include('imager_images.urls')),
+    url(r'^images/album/(?P<pk>\d+)/$',
+        login_required(AlbumView.as_view()),
+        name='album'),
+    url(r'^images/album/add/$', login_required(AlbumAddView.as_view()),
+        name='album_add'),
+    url(r'^images/album/edit/(?P<pk>\d+)/$', login_required(AlbumEditView.as_view()),
+        name='album_edit'),
+    url(r'^images/photos/(?P<pk>\d+)/$',
+        login_required(PhotoView.as_view()),
+        name='photo'),
+    url(r'^images/photos/add/$', login_required(PhotoAddView.as_view()),
+        name='photo_add'),
+    url(r'^images/photos/edit/(?P<pk>\d+)/$',
+        login_required(PhotoEditView.as_view()),
+        name='photo_edit'),
+
 ]
 
 if settings.DEBUG:

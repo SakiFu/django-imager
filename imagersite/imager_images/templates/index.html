@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% block content %}
+
+<!DOCTYPE html>
+<!-- <html lang="en">
+
+  <body>
+
+    <! -->
+
+    <!-- +++++ Welcome Section +++++ -->
+    <div id="ww">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 centered">
+                    <main id="body">
+                    {% if photo %}
+                    <img src="{{ MEDIA_ROOT }}{{ photo.image.url }}" alt="">
+                    {% else %}
+                    <img src="http://www.live2agewell.com/images/MoleRats.jpg" alt="">
+                    {% endif %}
+                    <h4>Django Imager lets you share and manage your photos effortlessly</h4>
+                    <p>You can create and customize your imager profile with your favorite photos.
+                        Now sharing your photos with your friends and family is just a click away.</p>
+                    {% if not user.is_authenticated %}
+                        <p><a href="http://eepurl.com/IcgkX">Join Us Now</a></p>
+                    {% endif %}
+                    <h3><a href='/profile'>Profile</a></h3>
+                    <h3><a href='/images/library'>Library</a></h3>
+                </main>
+                </div><!-- /col-lg-8 -->
+            </div><!-- /row -->
+        </div> <!-- /container -->
+    </div><!-- /ww -->
+
+
+    <!-- +++++ Projects Section +++++ -->
+<!-- Display photo placeholders, will be uncommented when we figure out what to put there -->
+<!--    <div class="container pt">
+        <div class="row mt centered">
+            <div class="col-lg-4">
+                <a class="zoom green" href="work01.html"><img class="img-responsive" src="assets/img/portfolio/port01.jpg" alt="" /></a>
+                <p>APE</p>
+            </div>
+            <div class="col-lg-4">
+                <a class="zoom green" href="work01.html"><img class="img-responsive" src="assets/img/portfolio/port02.jpg" alt="" /></a>
+                <p>RAIDERS</p>
+            </div>
+            <div class="col-lg-4">
+                <a class="zoom green" href="work01.html"><img class="img-responsive" src="assets/img/portfolio/port03.jpg" alt="" /></a>
+                <p>VIKINGS</p> -->
+<!--            </div> -->
+        <!-- </div> --><!-- /row -->
+<!--        <div class="row mt centered">
+            <div class="col-lg-4">
+                <a class="zoom green" href="work01.html"><img class="img-responsive" src="assets/img/portfolio/port04.jpg" alt="" /></a>
+                <p>YODA</p>
+            </div>
+            <div class="col-lg-4">
+                <a class="zoom green" href="work01.html"><img class="img-responsive" src="assets/img/portfolio/port05.jpg" alt="" /></a>
+                <p>EMPERORS</p>
+            </div>
+            <div class="col-lg-4">
+                <a class="zoom green" href="work01.html"><img class="img-responsive" src="assets/img/portfolio/port06.jpg" alt="" /></a>
+                <p>CHIEFS</p>
+            </div> -->
+        <!-- </div> --><!-- /row -->
+    <!-- </div> --><!-- /container -->
+
+
+    <!-- +++++ Footer Section +++++ -->
+
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="assets/js/bootstrap.min.js"></script>
+  </body>
+</html>
+{% endblock %}

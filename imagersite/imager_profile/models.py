@@ -1,4 +1,3 @@
-from __future__ import unicode_literals
 from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
 from django.contrib.auth.models import User
@@ -17,16 +16,16 @@ class ActiveProfileManager(models.Manager):
 @python_2_unicode_compatible
 class ImagerProfile(models.Model):
     PHOTOGRAPHY_TYPE_CHOICES = (
-        ('AB', 'Abstract'),
-        ('AN', 'Animal'),
-        ('AR', 'Artistic'),
-        ('BE', 'Beauty'),
-        ('FA', 'Fashion'),
-        ('LA', 'Landscape'),
-        ('NA', 'Nature'),
-        ('PE', 'People'),
-        ('TR', 'Travel'),
-        ('WE', 'Wedding'),
+        ('Abstract', 'Abstract'),
+        ('Animal', 'Animal'),
+        ('Artistic', 'Artistic'),
+        ('Beauty', 'Beauty'),
+        ('Fashion', 'Fashion'),
+        ('Landscape', 'Landscape'),
+        ('Nature', 'Nature'),
+        ('People', 'People'),
+        ('Travel', 'Travel'),
+        ('Wedding', 'Wedding'),
     )
     user = models.OneToOneField(
         User,
@@ -34,13 +33,12 @@ class ImagerProfile(models.Model):
         null=False
     )
 
-    camera = models.CharField(max_length=128,
-                              help_text='What is model of your camera?')
+    camera = models.CharField(max_length=128, help_text='What is model of your camera?')
     address = models.TextField()
     website_url = models.URLField()
     photography_type = models.CharField(
         max_length=64,
-        help_text="What type of photography do you primarily take?",
+        help_text="What type of photography do you primaliry make?",
         choices=PHOTOGRAPHY_TYPE_CHOICES
     )
     objects = models.Manager()
@@ -51,3 +49,6 @@ class ImagerProfile(models.Model):
 
     def is_active(self):
         return self.user.is_active
+
+    def show_all_album(self):
+        return self.albums.all()
