@@ -1,6 +1,5 @@
 from django.shortcuts import render
-from .models import Photo
-from .models import Album
+from .models import Photo, Album, FaceRecognition
 from django.views.generic import TemplateView, DetailView, CreateView, UpdateView
 from django.db.models import Q
 from django.forms.models import ModelForm
@@ -13,12 +12,13 @@ import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+
 def get_faces(photo):
     import Algorithmia
     import base64
     Algorithmia.apiKey = os.environ['Simple simkBOjTtJ05lfuY+E03zcdDKm61']
-    # file_path = 'media/' + str(photo.file)
-    # file_path = os.path.join(BASE_DIR, file_path)
+    file_path = 'media/' + str(photo.file)
+    file_path = os.path.join(BASE_DIR, file_path)
 
     with open(file_path, 'rb') as img:
         b64 = base64.b64encode(img.read())
@@ -27,7 +27,7 @@ def get_faces(photo):
 
     faces = []
     for rect in result:
-        face = Face()
+        face = FaceRecognition()
         face.photo = photo
         face.name = '?'
         face.x = rect['x']
