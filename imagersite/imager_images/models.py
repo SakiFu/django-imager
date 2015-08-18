@@ -52,7 +52,7 @@ class Album(models.Model):
 
 
 @python_2_unicode_compatible
-class FaceRecognition(models.Model):
+class Face(models.Model):
     photo = models.ForeignKey(Photo, related_name='faces', null=False)
     name = models.CharField(max_length=128, blank=True, null=True)
     x = models.IntegerField()

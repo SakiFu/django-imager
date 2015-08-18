@@ -1,11 +1,11 @@
 from django.shortcuts import render
-from .models import Photo, Album, FaceRecognition
+from .models import Photo, Album, Face
 from django.views.generic import TemplateView, DetailView, CreateView, UpdateView
 from django.db.models import Q
 from django.forms.models import ModelForm
-from django.core.urlresolvers import reverse_lazy, reverse
+# from django.core.urlresolvers import reverse_lazy, reverse
 from django.contrib.auth.views import redirect_to_login
-from django.http import Http404
+from django.http import Http404, HttpResponse
 import os
 # from settings import MEDIA_URL, STATIC_URL
 # Create your views here.
@@ -27,7 +27,7 @@ def get_faces(photo):
 
     faces = []
     for rect in result:
-        face = FaceRecognition()
+        face = Face()
         face.photo = photo
         face.name = '?'
         face.x = rect['x']
@@ -37,6 +37,32 @@ def get_faces(photo):
         face.save()
         faces.append(face)
     return faces
+
+
+def set_faces(request, id):
+    if request.methos != 'POST':
+        return HttpResponse("Error. Only Post accepted.")
+
+    photo = Photo.objects.get(id=id)
+    fid = request.POST.get('id', '0')
+    face = Face.objectsget(id=fid)
+    face.name = request.POST.get('name', 'Unknown')
+    face.save()
+    return HttpResponse("Done.")
+
+
+class FaceEditView(TemplateView):
+    model = Face
+
+    def post(self, request, *args, **kwargs):
+        try:
+            face = Face.objects.get(id=request.POST['id'])
+            face.name = request.POST['name']
+            face.save()
+        except (TypeError, Photo.DoesNotExist, Face.DoesNotExist):
+            pass
+        return HttpResponse()
+
 
 class IndexView(TemplateView):
     template = 'index.html'

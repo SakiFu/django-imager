@@ -19,7 +19,7 @@ from django.contrib import admin
 from django.conf.urls.static import static
 from django.contrib.auth.decorators import login_required
 import views
-from imager_images.views import  PhotoView, AlbumView, AlbumAddView, PhotoAddView, AlbumEditView, PhotoEditView
+from imager_images.views import PhotoView, AlbumView, AlbumAddView, PhotoAddView, AlbumEditView, PhotoEditView, FaceEditView
 
 
 urlpatterns = [
@@ -44,7 +44,10 @@ urlpatterns = [
         login_required(PhotoEditView.as_view()),
         name='photo_edit'),
     url(r'^photos/(?P<pk>\d+)/detect$', PhotoView.as_view(detect=True),
-        name='detect_faces')
+        name='detect_faces'),
+    url(r'^photo/(?P<pk>\d+)/face/edit/$',
+        FaceEditView.as_view(),
+        name='edit_face')
 
 ]
 
