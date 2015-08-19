@@ -23,6 +23,7 @@ class PhotoFactory(factory.Factory):
     class Meta:
         model = Photo
         # django_get_or_create = ('title', 'description',)
+    image = factory.django.ImageField()
     title = 'title_test_photo'
     description = 'description_test_photo'
 
