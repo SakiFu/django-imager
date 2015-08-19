@@ -1,6 +1,6 @@
 from django.contrib import admin
-from .models import Photo
-from .models import Album, Face
+from .models import Photo, Album, Face
+
 # Register your models here.
 
 admin.site.register(Photo)
