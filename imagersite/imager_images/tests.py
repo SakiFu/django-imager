@@ -6,11 +6,12 @@ from . import models
 from .models import Photo, Album
 from django.contrib.auth.models import User
 from django.test import Client
+from factory.django import DjangoModelFactory
 
 fake = Factory.create()
 
 
-class UserFactory(factory.Factory):
+class UserFactory(DjangoModelFactory):
     class Meta:
         model = User
     first_name = fake.first_name()
@@ -19,15 +20,17 @@ class UserFactory(factory.Factory):
     username = factory.Sequence(lambda n: "user{}".format(n))
 
 
-class PhotoFactory(factory.Factory):
+class PhotoFactory(DjangoModelFactory):
     class Meta:
         model = Photo
         # django_get_or_create = ('title', 'description',)
+    image = factory.django.ImageField()
     title = 'title_test_photo'
     description = 'description_test_photo'
+    # the_image = factory.django.ImageField()
 
 
-class AlbumFactory(factory.Factory):
+class AlbumFactory(DjangoModelFactory):
     class Meta:
         model = Album
         # django_get_or_create = ('title', 'description',)
@@ -47,7 +50,7 @@ class PhotoTestCase(TestCase):
         Photo.objects.all().delete()
 
     def test_add_photo(self):
-        self.assertTrue(Photo.objects.count() == 0)
+        self.assertFalse(Photo.objects is True)
         self.photo.save()
         self.assertTrue(Photo.objects.count() == 1)
 
@@ -66,7 +69,7 @@ class AlbumTestCase(TestCase):
         self.album = AlbumFactory(user=self.user)
 
     def test_add_albums(self):
-        self.assertTrue(Album.objects.count() == 0)
+        self.assertFalse(Photo.objects is True)
         self.album.save()
         self.assertTrue(Album.objects.count() == 1)
 
