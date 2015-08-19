@@ -55,7 +55,7 @@ class Login(TestCase):
             {'username': 'nobody',
              'password': 'password'},
             follow=True)
-        self.assertIn('Invalid log in. Please try again!', response.content)
+        self.assertIn('Your username and password didn\'t match. Please try again.', response.content)
 
 
 class Logout(TestCase):
