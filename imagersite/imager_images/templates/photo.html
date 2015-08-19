@@ -20,20 +20,16 @@
 
 
                             <div class='grid'>
-
+                            <div id='photo-container'>
                                 {% thumbnail photo.image "600x600" as image %}
                                 <img src="{{ image.url }}">
                                 {% endthumbnail %}
-
+                            </div>
                             <!-- <p>No photo...</p>
                             <img src='/static/img/is.jpg' height='180' width='180'> -->
                             <div class='info'>
                             <p>{{ photo.description }}</p>
 
-{% for face in photo.faces.all %}
-<div style="width: {{face.width}}px;height:{{face.height}}px;border:2px solid yellow;position:absolute;top: {{face.y}}px; left: {{face.x}}px;"></div>
-{% endfor %}
-</div>
 
 
                             <div>
