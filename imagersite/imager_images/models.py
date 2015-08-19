@@ -58,7 +58,7 @@ class Face(models.Model):
     x = models.IntegerField()
     y = models.IntegerField()
     height = models.IntegerField()
-    width = models.IntegerField
+    width = models.IntegerField()
 
     def __str__(self):
         return 'face:' + self.name
