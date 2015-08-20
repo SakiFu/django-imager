@@ -27,6 +27,7 @@ urlpatterns = [
     url(r'^profile/', include('imager_profile.urls')),
     url(r'^accounts/', include('registration.backends.default.urls')),
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^api/', include('imager_api.urls')),
     url(r'^images/', include('imager_images.urls')),
     url(r'^images/album/(?P<pk>\d+)/$',
         login_required(AlbumView.as_view()),
@@ -48,6 +49,7 @@ urlpatterns = [
     url(r'^photo/(?P<pk>\d+)/face/edit/$',
         FaceEditView.as_view(),
         name='edit_face')
+
 
 ]
 

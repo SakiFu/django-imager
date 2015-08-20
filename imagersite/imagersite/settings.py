@@ -47,6 +47,7 @@ INSTALLED_APPS = (
     'registration',
     'sorl.thumbnail',
     'debug_toolbar',
+    'rest_framework',
 )
 
 MIDDLEWARE_CLASSES = (
