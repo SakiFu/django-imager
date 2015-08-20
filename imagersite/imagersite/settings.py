@@ -151,5 +151,5 @@ EMAIL_PORT = 587
 if os.environ.get('EMAIL_BACKEND', None):
     EMAIL_BACKEND = os.environ['EMAIL_BACKEND']
 
-CSRF_COOKIE_SECURE = os.environ.get('CSRF_COOKIE_SECURE', True)
-SESSION_COOKIE_SECURE = os.environ.get('SESSION_COOKIE_SECURE', True)
+# CSRF_COOKIE_SECURE = os.environ.get('CSRF_COOKIE_SECURE', True)
+# SESSION_COOKIE_SECURE = os.environ.get('SESSION_COOKIE_SECURE', True)
