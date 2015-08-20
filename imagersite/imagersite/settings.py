@@ -41,7 +41,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-     'django.contrib.gis',
+    'django.contrib.gis',
     'imager_profile',
     'imager_images',
     'bootstrap3',
@@ -92,19 +92,19 @@ WSGI_APPLICATION = 'imagersite.wsgi.application'
 #     }
 # }
 
-DATABASES = {
-    'default': dj_database_url.config(
-        default='postgis://sakiukaji:@localhost:5432/django-imager'
-    )
-}
-
 # DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': 'imagerdb',
-#         'USER': os.environ.get('USER'),
-#     }
+#     'default': dj_database_url.config(
+#         default='postgis://sakiukaji:@localhost:5432/django-imager'
+#     )
 # }
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.contrib.gis.db.backends.postgis',
+        'NAME': 'django-imager',
+        'USER': os.environ.get('USER'),
+    }
+}
 
 #registration
 ACCOUNT_ACTIVATION_DAYS = 7
