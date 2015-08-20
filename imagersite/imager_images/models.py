@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils.encoding import python_2_unicode_compatible
+from django.contrib.gis.db import models as geo_models
 
 PUBLISHED_CHOICES = (
     ('private', 'private'),
@@ -25,6 +26,8 @@ class Photo(models.Model):
     published = models.CharField(max_length=256,
                                  choices=PUBLISHED_CHOICES,
                                  default='private')
+    location = geo_models.PointField("location", null=True, blank=True)
+    objects = geo_models.GeoManager()
     def __str__(self):
         return self.title
 

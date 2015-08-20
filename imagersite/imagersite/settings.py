@@ -92,17 +92,17 @@ WSGI_APPLICATION = 'imagersite.wsgi.application'
 #     }
 # }
 
-DATABASES = {
-    'default': dj_database_url.config(
-        default='postgresql://sakiukaji@localhost:5432/django-imager'
-    )
-}
-
 # DATABASES = {
 #     'default': dj_database_url.config(
-#         default='postgis://sakiukaji:@localhost:5432/django-imager'
-#      )
+#         default='postgresql://sakiukaji@localhost:5432/django-imager'
+#     )
 # }
+
+DATABASES = {
+    'default': dj_database_url.config(
+        default='postgis://sakiukaji:@localhost:5432/django-imager'
+    )
+ }
 
 # # DATABASES = {
 # #     'default': {

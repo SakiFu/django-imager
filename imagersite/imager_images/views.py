@@ -97,7 +97,7 @@ class PhotoView(DetailView):
 class PhotoAddView(CreateView):
     template_name = 'photo_add.html'
     model = Photo
-    fields = ['image', 'title', 'description', 'published']
+    fields = ['image', 'title', 'description', 'published', 'location']
     success_url = '/images/library/'
 
     def form_valid(self, form):
@@ -109,7 +109,7 @@ class PhotoAddView(CreateView):
 class PhotoEditView(UpdateView):
     template_name = 'photo_edit.html'
     model = Photo
-    fields = ['image', 'title', 'description', 'published']
+    fields = ['image', 'title', 'description', 'published', 'location']
     success_url = '/images/library/'
 
     def get_object(self):
