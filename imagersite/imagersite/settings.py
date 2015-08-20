@@ -24,12 +24,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = os.environ['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DEBUG', False)
 
 TEMPLATE_DEBUG = DEBUG
 THUMBNAIL_DEBUG = DEBUG
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '').split()
 
 
 # Application definition
@@ -132,7 +132,8 @@ USE_L10N = True
 
 USE_TZ = True
 
-
+AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY', None)
+AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID', None)
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
@@ -150,3 +151,5 @@ EMAIL_PORT = 587
 if os.environ.get('EMAIL_BACKEND', None):
     EMAIL_BACKEND = os.environ['EMAIL_BACKEND']
 
+CSRF_COOKIE_SECURE = os.environ.get('CSRF_COOKIE_SECURE', True)
+SESSION_COOKIE_SECURE = os.environ.get('SESSION_COOKIE_SECURE', True)
